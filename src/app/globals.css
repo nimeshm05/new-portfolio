@@ -21,6 +21,9 @@
   --color-accent: #0084ff;
   --color-status: var(--neutral-300);
   --color-divider: var(--neutral-100);
+  --color-surface: var(--color-background);
+  --color-surface-hover: var(--neutral-50);
+  --color-surface-active: var(--neutral-100);
   --color-preview-shadow: color-mix(in srgb, var(--neutral-950) 8%, transparent);
 
   /* Typography */
@@ -62,7 +65,7 @@
   /* Radius */
   --radius-none: 0;
   --radius-item: 4px;
-  --radius-preview: 12px;
+  --radius-preview: 4px;
   --radius-full: 50%;
 
   /* Effects */

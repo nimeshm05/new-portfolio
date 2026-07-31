@@ -38,7 +38,6 @@
   flex-direction: column;
   gap: var(--space-2xl);
   width: var(--size-full);
-  padding: var(--space-none) var(--space-md);
 }
 
 .portfolio-identity {
@@ -46,6 +45,7 @@
   flex-direction: column;
   gap: var(--space-lg);
   width: var(--size-full);
+  padding: var(--space-none) var(--space-md);
 }
 
 .portfolio-avatar {
@@ -104,23 +104,37 @@
 .portfolio-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-xs);
   width: var(--size-full);
 }
 
 .portfolio-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-item);
   font-weight: var(--font-weight-medium);
   font-size: var(--text-size);
   line-height: var(--line-height);
-  color: var(--color-muted);
+  color: var(--color-secondary);
+  background: var(--color-surface);
+  white-space: nowrap;
 }
 
 .portfolio-nav-link:hover {
-  color: var(--color-foreground);
+  color: var(--color-secondary);
+  background: var(--color-surface-hover);
 }
 
 .portfolio-nav-link.is-active {
-  color: var(--color-accent);
+  color: var(--color-foreground);
+  background: var(--color-surface-active);
+}
+
+.portfolio-nav-link.is-active:hover {
+  color: var(--color-foreground);
+  background: var(--color-surface-active);
 }
 
 .portfolio-content {
@@ -168,6 +182,7 @@
 
 .portfolio-project.is-active {
   z-index: var(--z-active);
+  background-color: var(--color-surface-active);
 }
 
 .portfolio-project-icon {

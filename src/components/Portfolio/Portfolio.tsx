@@ -74,7 +74,7 @@ export function Portfolio() {
                   </span>
                   <span className="portfolio-roles-dot" aria-hidden="true" />
                   <span className="portfolio-role">
-                    ms-hcde student at udub
+                    ms-hcde student @ udub
                   </span>
                 </p>
               </div>
