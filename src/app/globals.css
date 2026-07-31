@@ -1,0 +1,120 @@
+:root {
+  /* Tailwind neutral palette */
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+  --neutral-950: #0a0a0a;
+
+  /* Colors */
+  --color-background: #ffffff;
+  --color-foreground: var(--neutral-900);
+  --color-secondary: var(--neutral-500);
+  --color-muted: var(--neutral-300);
+  --color-text-muted: var(--neutral-400);
+  --color-accent: #0084ff;
+  --color-status: var(--neutral-300);
+  --color-divider: var(--neutral-100);
+  --color-preview-shadow: color-mix(in srgb, var(--neutral-950) 8%, transparent);
+
+  /* Typography */
+  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-size: 16px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --letter-spacing-wide: 0.04em;
+  --line-height: normal;
+
+  /* Spacing */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 40px;
+  --space-3xl: 67px;
+  --space-section: 16px;
+  --space-none: 0;
+
+  /* Sizes */
+  --size-full: 100%;
+  --size-viewport: 100vh;
+  --avatar-size: 24px;
+  --dot-size: 8px;
+  --icon-size-sm: 16px;
+  --icon-size-md: 20px;
+  --divider-height: 1px;
+  --sidebar-width: 440px;
+  --content-width: 280px;
+  --content-width-mobile: 400px;
+  --preview-width: 680px;
+  --preview-height: 415px;
+  --preview-height-mobile: 280px;
+  --page-top: 80px;
+
+  /* Radius */
+  --radius-none: 0;
+  --radius-item: 4px;
+  --radius-preview: 12px;
+  --radius-full: 50%;
+
+  /* Effects */
+  --blur-hover: 4px;
+  --opacity-blurred: 0.55;
+  --opacity-full: 1;
+  --shadow-blur: 20px;
+  --shadow-preview: 0 0 var(--shadow-blur) 0 var(--color-preview-shadow);
+
+  /* Z-index */
+  --z-base: 0;
+  --z-active: 1;
+
+  /* Breakpoints (literals required in @media — keep in sync) */
+  --breakpoint-lg: 1100px;
+  --breakpoint-sm: 640px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: var(--space-none);
+  min-height: var(--size-viewport);
+  font-family: var(--font-sans);
+  font-size: var(--text-size);
+  color: var(--color-foreground);
+  background: var(--color-background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: var(--space-none);
+  cursor: pointer;
+}
+
+p {
+  margin: var(--space-none);
+}
