@@ -3,7 +3,8 @@
   justify-content: center;
   height: var(--size-viewport);
   overflow: hidden;
-  padding: var(--space-none) var(--space-2xl);
+  padding: var(--space-none);
+  width: var(--size-full);
 }
 
 .portfolio-layout {
@@ -12,7 +13,7 @@
   gap: var(--space-none);
   width: var(--size-full);
   height: var(--size-full);
-  max-width: calc(var(--sidebar-width) + var(--preview-width));
+  padding: var(--space-none) var(--page-inline);
 }
 
 .portfolio-sidebar {

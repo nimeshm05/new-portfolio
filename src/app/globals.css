@@ -54,13 +54,14 @@
   --icon-size-sm: 16px;
   --icon-size-md: 20px;
   --divider-height: 1px;
-  --sidebar-width: 440px;
+  --sidebar-width: 36%;
   --content-width: 280px;
   --content-width-mobile: 400px;
-  --preview-width: 680px;
-  --preview-height: 415px;
+  --preview-width: 64%;
+  --preview-height: 540px;
   --preview-height-mobile: 280px;
   --page-top: 80px;
+  --page-inline: 6%;
 
   /* Radius */
   --radius-none: 0;
