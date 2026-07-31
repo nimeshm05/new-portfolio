@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 import { ChevronRight } from "lucide-react";
 import {
   industryProjects,
@@ -8,6 +9,7 @@ import {
   type Project,
 } from "@/data/projects";
 import { ProjectPreview } from "@/components/ProjectPreview/ProjectPreview";
+import { SIDEBAR_BLUR_VARIANTS } from "@/motion";
 import "./Portfolio.css";
 
 function ProjectListItem({
@@ -59,7 +61,12 @@ export function Portfolio() {
       className={`portfolio${activeProject ? " portfolio-has-hover" : ""}`}
     >
       <div className="portfolio-layout">
-        <div className="portfolio-sidebar">
+        <motion.div
+          className="portfolio-sidebar"
+          variants={SIDEBAR_BLUR_VARIANTS}
+          initial="hidden"
+          animate="show"
+        >
           <header className="portfolio-header">
             <div className="portfolio-identity">
               <div className="portfolio-avatar">
@@ -70,9 +77,9 @@ export function Portfolio() {
                 <p className="portfolio-name">nimesh.mohanakrishnan</p>
                 <p className="portfolio-roles">
                   <span className="portfolio-role">
-                    product designer @ knool
+                    product design intern @ knool
                   </span>
-                  <span className="portfolio-roles-dot" aria-hidden="true" />
+                  {/* <span className="portfolio-roles-dot" aria-hidden="true" /> */}
                   <span className="portfolio-role">
                     ms-hcde student @ udub
                   </span>
@@ -140,7 +147,7 @@ export function Portfolio() {
               </ul>
             </section>
           </div>
-        </div>
+        </motion.div>
 
         <ProjectPreview project={activeProject} />
       </div>
