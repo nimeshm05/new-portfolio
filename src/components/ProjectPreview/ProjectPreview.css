@@ -2,13 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: var(--preview-width);
   height: var(--size-full);
   flex: 1 1 auto;
   min-width: 0;
   align-self: stretch;
   pointer-events: none;
+  padding-top: var(--page-top);
 }
 
 .project-preview-card {

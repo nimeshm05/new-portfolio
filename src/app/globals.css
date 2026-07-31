@@ -60,8 +60,8 @@
   --preview-width: 64%;
   --preview-height: 540px;
   --preview-height-mobile: 280px;
-  --page-top: 80px;
-  --page-inline: 6%;
+  --page-top: 4%;
+  --page-inline: 4%;
 
   /* Radius */
   --radius-none: 0;

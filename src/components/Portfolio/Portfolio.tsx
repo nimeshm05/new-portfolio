@@ -67,7 +67,7 @@ export function Portfolio() {
                 <img src="/assets/avatar.svg" alt="" width={24} height={24} />
               </div>
               <div className="portfolio-info">
-                <p className="portfolio-name">nimesh mohanakrishnan</p>
+                <p className="portfolio-name">nimesh.mohanakrishnan</p>
                 <p className="portfolio-roles">
                   <span className="portfolio-role">
                     product designer @ knool
