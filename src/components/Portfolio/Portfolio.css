@@ -10,10 +10,8 @@
 .portfolio-layout {
   display: flex;
   align-items: stretch;
-  gap: var(--space-none);
   width: var(--size-full);
   height: var(--size-full);
-  padding: var(--space-none) var(--page-inline);
 }
 
 .portfolio-sidebar {
@@ -28,6 +26,8 @@
   -ms-overflow-style: none;
   padding-top: var(--page-top);
   padding-bottom: var(--space-2xl);
+  padding: var(--space-2xl) var(--space-md);
+  border-right: 0.6px solid var(--color-divider);
 }
 
 .portfolio-sidebar::-webkit-scrollbar {
@@ -37,7 +37,7 @@
 .portfolio-header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
+  gap: var(--space-xl);
   width: var(--size-full);
 }
 
@@ -71,11 +71,12 @@
 }
 
 .portfolio-name {
+  width: var(--size-full);
   font-weight: var(--font-weight-medium);
   font-size: var(--text-size);
   line-height: var(--line-height);
   color: var(--color-foreground);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .portfolio-roles {
@@ -88,11 +89,12 @@
 }
 
 .portfolio-role {
+  width: var(--size-full);
   font-weight: var(--font-weight-regular);
   font-size: var(--text-size);
   line-height: var(--line-height);
   color: var(--color-text-muted);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .portfolio-roles-dot {
@@ -114,9 +116,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-item);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
   font-size: var(--text-size);
   line-height: var(--line-height);
   color: var(--color-secondary);
@@ -142,8 +144,8 @@
 .portfolio-content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
-  width: var(--content-width);
+  gap: var(--space-xl);
+  width: var(--size-full);
 }
 
 .portfolio-section {
@@ -219,14 +221,6 @@
   color: var(--color-foreground);
 }
 
-.portfolio-has-hover .portfolio-header,
-.portfolio-has-hover .portfolio-section-label,
-.portfolio-has-hover .portfolio-divider,
-.portfolio-has-hover .portfolio-project:not(.is-active) {
-  filter: blur(var(--blur-hover));
-  opacity: var(--opacity-blurred);
-}
-
 .portfolio-divider {
   width: var(--size-full);
   height: var(--divider-height);
@@ -264,7 +258,6 @@
 
   .portfolio-content {
     width: var(--size-full);
-    max-width: var(--content-width-mobile);
   }
 }
 

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:wght@400;500&display=swap");
+
 :root {
   /* Tailwind neutral palette */
   --neutral-50: #fafafa;
@@ -20,19 +22,19 @@
   --color-text-muted: var(--neutral-400);
   --color-accent: #0084ff;
   --color-status: var(--neutral-300);
-  --color-divider: var(--neutral-100);
+  --color-divider: var(--neutral-200);
   --color-surface: var(--color-background);
   --color-surface-hover: var(--neutral-50);
   --color-surface-active: var(--neutral-100);
   --color-preview-shadow: color-mix(in srgb, var(--neutral-950) 8%, transparent);
 
   /* Typography */
-  --font-sans: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "Zalando Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --text-size: 16px;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --letter-spacing-wide: 0.04em;
-  --line-height: normal;
+  --line-height: 1.5;
 
   /* Spacing */
   --space-2xs: 2px;
@@ -53,15 +55,15 @@
   --dot-size: 8px;
   --icon-size-sm: 16px;
   --icon-size-md: 20px;
-  --divider-height: 1px;
-  --sidebar-width: 36%;
+  --divider-height: 0.6px;
+  --sidebar-width: 18%;
   --content-width: 280px;
   --content-width-mobile: 400px;
   --preview-width: 64%;
   --preview-height: 540px;
   --preview-height-mobile: 280px;
-  --page-top: 4%;
-  --page-inline: 4%;
+  --page-top: 2%;
+  --page-inline: 2%;
 
   /* Radius */
   --radius-none: 0;
@@ -70,8 +72,6 @@
   --radius-full: 50%;
 
   /* Effects */
-  --blur-hover: 4px;
-  --opacity-blurred: 0.55;
   --opacity-full: 1;
   --shadow-blur: 20px;
   --shadow-preview: 0 0 var(--shadow-blur) 0 var(--color-preview-shadow);
@@ -92,15 +92,20 @@
 }
 
 html {
+  width: var(--size-full);
+  height: var(--size-viewport);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: var(--space-none);
+  width: var(--size-full);
   min-height: var(--size-viewport);
+  height: var(--size-viewport);
   font-family: var(--font-sans);
   font-size: var(--text-size);
+  line-height: var(--line-height);
   color: var(--color-foreground);
   background: var(--color-background);
 }

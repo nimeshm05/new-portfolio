@@ -57,9 +57,7 @@ export function Portfolio() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
   return (
-    <main
-      className={`portfolio${activeProject ? " portfolio-has-hover" : ""}`}
-    >
+    <main className="portfolio">
       <div className="portfolio-layout">
         <motion.div
           className="portfolio-sidebar"
@@ -74,14 +72,14 @@ export function Portfolio() {
                 <img src="/assets/avatar.svg" alt="" width={24} height={24} />
               </div>
               <div className="portfolio-info">
-                <p className="portfolio-name">nimesh.mohanakrishnan</p>
+                <p className="portfolio-name">Nimesh Mohanakrishnan</p>
                 <p className="portfolio-roles">
-                  <span className="portfolio-role">
+                  {/* <span className="portfolio-role">
                     product design intern @ knool
-                  </span>
+                  </span> */}
                   {/* <span className="portfolio-roles-dot" aria-hidden="true" /> */}
                   <span className="portfolio-role">
-                    ms-hcde student @ udub
+                    Currently, MS-HCDE Student @ udub. Previously, designed internal tools at RozieAI.
                   </span>
                 </p>
               </div>
@@ -110,7 +108,7 @@ export function Portfolio() {
               aria-labelledby="industry-label"
             >
               <h2 className="portfolio-section-label" id="industry-label">
-                industry
+                Industry
               </h2>
               <ul className="portfolio-project-list">
                 {industryProjects.map((project) => (
@@ -132,7 +130,7 @@ export function Portfolio() {
               aria-labelledby="personal-label"
             >
               <h2 className="portfolio-section-label" id="personal-label">
-                personal
+                Personal
               </h2>
               <ul className="portfolio-project-list">
                 {personalProjects.map((project) => (
