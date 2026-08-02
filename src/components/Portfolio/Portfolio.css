@@ -128,8 +128,8 @@
 }
 
 .portfolio-nav-link:hover {
-  color: var(--color-secondary);
-  background: var(--color-surface-hover);
+  color: var(--color-foreground);
+  background: transparent;
 }
 
 .portfolio-nav-link.is-active {
