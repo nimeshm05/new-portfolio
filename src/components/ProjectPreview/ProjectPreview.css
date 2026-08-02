@@ -9,7 +9,7 @@
   min-width: 0;
   align-self: stretch;
   pointer-events: none;
-  background: var(--neutral-100);
+  background: var(--neutral-50);
   padding: var(--space-2xl) var(--space-md);
   container-type: size;
   container-name: preview;
