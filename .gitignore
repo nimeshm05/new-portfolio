@@ -24,9 +24,6 @@
 .DS_Store
 *.pem
 
-# large local preview assets (keep on disk / host elsewhere for deploy)
-/public/assets/preview-videos/
-
 # debug
 npm-debug.log*
 yarn-debug.log*
