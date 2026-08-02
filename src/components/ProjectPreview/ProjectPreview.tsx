@@ -34,33 +34,29 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
       aria-live="polite"
       aria-hidden={!project}
     >
-      {project ? (
-        <div
-          className={`project-preview-card${hasVideo ? " has-video" : ""}`}
+      {project?.previewVideo ? (
+        <motion.video
           key={project.id}
-        >
-          {project.previewVideo ? (
-            <motion.video
-              ref={videoRef}
-              className="project-preview-video"
-              src={project.previewVideo}
-              muted
-              loop
-              playsInline
-              autoPlay
-              variants={PREVIEW_VIDEO_VARIANTS}
-              initial="hidden"
-              animate="show"
-            />
-          ) : (
-            <div className="project-preview-content">
-              <p className="project-preview-title">{project.title}</p>
-              <p className="project-preview-tagline">
-                {project.tagline ?? project.description}
-              </p>
-              <p className="project-preview-soon">coming soon</p>
-            </div>
-          )}
+          ref={videoRef}
+          className="project-preview-video"
+          src={project.previewVideo}
+          muted
+          loop
+          playsInline
+          autoPlay
+          variants={PREVIEW_VIDEO_VARIANTS}
+          initial="hidden"
+          animate="show"
+        />
+      ) : project ? (
+        <div className="project-preview-card" key={project.id}>
+          <div className="project-preview-content">
+            <p className="project-preview-title">{project.title}</p>
+            <p className="project-preview-tagline">
+              {project.tagline ?? project.description}
+            </p>
+            <p className="project-preview-soon">coming soon</p>
+          </div>
         </div>
       ) : null}
     </aside>

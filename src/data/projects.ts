@@ -45,6 +45,7 @@ export const projects: Project[] = [
       "usability studies on architecture agent feature with actual ai.",
     category: "industry",
     icon: Bot,
+    previewVideo: "/assets/preview-videos/actual-ai-banner.mp4",
   },
   {
     id: "kar-no-key",

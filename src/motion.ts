@@ -16,7 +16,7 @@ export const SIDEBAR_BLUR_VARIANTS = {
 };
 
 export const PREVIEW_VIDEO_TRANSITION = {
-  duration: 0.05,
+  duration: 0.08,
   ease: "easeOut" as const,
 };
 
