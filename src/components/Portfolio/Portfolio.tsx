@@ -79,7 +79,7 @@ export function Portfolio() {
                   </span> */}
                   {/* <span className="portfolio-roles-dot" aria-hidden="true" /> */}
                   <span className="portfolio-role">
-                    Currently, MS-HCDE Student @ udub. Previously, designed internal tools @ RozieAI.
+                    Currently, MS-HCDE Student @ the University of Washington.
                   </span>
                 </p>
               </div>
