@@ -2,12 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import type { Project } from "@/data/projects";
 import { PREVIEW_VIDEO_VARIANTS } from "@/motion";
 import "./ProjectPreview.css";
 
+export type PreviewItem = {
+  id: string;
+  title: string;
+  description: string;
+  tagline?: string;
+  previewVideo?: string;
+};
+
 type ProjectPreviewProps = {
-  project: Project | null;
+  project: PreviewItem | null;
 };
 
 export function ProjectPreview({ project }: ProjectPreviewProps) {

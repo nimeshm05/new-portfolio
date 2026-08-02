@@ -24,14 +24,14 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "discovery-responses",
-    title: "discovery responses",
+    title: "Discovery Responses",
     description: "reimagining how lawyers respond to discovery questions.",
     category: "industry",
     icon: MessageCircleMore,
   },
   {
     id: "conversation-insights",
-    title: "conversation insights",
+    title: "Conversation Insights",
     description:
       "self-serve analytics platform for Air Canada contact centre teams.",
     category: "industry",
@@ -40,7 +40,7 @@ export const projects: Project[] = [
   },
   {
     id: "architecture-agent",
-    title: "architecture agent",
+    title: "Architecture Agent",
     description:
       "usability studies on architecture agent feature with actual ai.",
     category: "industry",
@@ -49,7 +49,7 @@ export const projects: Project[] = [
   },
   {
     id: "kar-no-key",
-    title: "kar-no-key",
+    title: "Kar-No-Key",
     description:
       "multiplayer type racer game built using supabase, cursor, and figma.",
     category: "personal",
@@ -59,7 +59,7 @@ export const projects: Project[] = [
   },
   {
     id: "gzlang",
-    title: "gz-lang",
+    title: "GZ-Lang",
     description: "transpiler the decodes genz language into javascript.",
     category: "personal",
     icon: CodeXml,

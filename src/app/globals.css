@@ -17,7 +17,7 @@
   /* Colors */
   --color-background: oklch(100% 0 0);
   --color-foreground: var(--neutral-900);
-  --color-secondary: var(--neutral-500);
+  --color-secondary: var(--neutral-600);
   --color-muted: var(--neutral-300);
   --color-text-muted: var(--neutral-400);
   --color-accent: oklch(62.4% 0.206 255.1);

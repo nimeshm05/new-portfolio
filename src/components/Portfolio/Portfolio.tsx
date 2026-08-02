@@ -2,28 +2,34 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, type LucideIcon } from "lucide-react";
+import { industryProjects, personalProjects } from "@/data/projects";
+import { aboutTopics } from "@/data/about";
 import {
-  industryProjects,
-  personalProjects,
-  type Project,
-} from "@/data/projects";
-import { ProjectPreview } from "@/components/ProjectPreview/ProjectPreview";
+  ProjectPreview,
+  type PreviewItem,
+} from "@/components/ProjectPreview/ProjectPreview";
 import { SIDEBAR_BLUR_VARIANTS } from "@/motion";
 import "./Portfolio.css";
 
+type Tab = "work" | "about";
+
+type SidebarItem = PreviewItem & {
+  icon: LucideIcon;
+};
+
 function ProjectListItem({
-  project,
+  item,
   isActive,
   onActivate,
   onDeactivate,
 }: {
-  project: Project;
+  item: SidebarItem;
   isActive: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
 }) {
-  const Icon = project.icon;
+  const Icon = item.icon;
 
   return (
     <li>
@@ -41,7 +47,7 @@ function ProjectListItem({
           strokeWidth={1.75}
           aria-hidden="true"
         />
-        <span className="portfolio-project-title">{project.title}</span>
+        <span className="portfolio-project-title">{item.title}</span>
         <ChevronRight
           className="portfolio-project-chevron"
           size={20}
@@ -54,7 +60,13 @@ function ProjectListItem({
 }
 
 export function Portfolio() {
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [activeTab, setActiveTab] = useState<Tab>("work");
+  const [activeItem, setActiveItem] = useState<SidebarItem | null>(null);
+
+  function selectTab(tab: Tab) {
+    setActiveTab(tab);
+    setActiveItem(null);
+  }
 
   return (
     <main className="portfolio">
@@ -67,35 +79,43 @@ export function Portfolio() {
         >
           <header className="portfolio-header">
             <div className="portfolio-identity">
-              <div className="portfolio-avatar">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/assets/avatar.svg" alt="" width={24} height={24} />
+              <div className="portfolio-avatar" aria-hidden="true">
+                <svg
+                  className="portfolio-logo"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M11 0.57735C11.6188 0.220084 12.3812 0.220085 13 0.57735L21.3923 5.42265C22.0111 5.77992 22.3923 6.44017 22.3923 7.1547V16.8453C22.3923 17.5598 22.0111 18.2201 21.3923 18.5774L13 23.4226C12.3812 23.7799 11.6188 23.7799 11 23.4226L2.6077 18.5774C1.98889 18.2201 1.6077 17.5598 1.6077 16.8453V7.1547C1.6077 6.44017 1.98889 5.77992 2.6077 5.42265L11 0.57735Z" />
+                </svg>
               </div>
               <div className="portfolio-info">
                 <p className="portfolio-name">Nimesh Mohanakrishnan</p>
                 <p className="portfolio-roles">
-                  {/* <span className="portfolio-role">
-                    product design intern @ knool
-                  </span> */}
-                  {/* <span className="portfolio-roles-dot" aria-hidden="true" /> */}
-                  <span className="portfolio-role">
-                    Currently, MS-HCDE Student @ the University of Washington.
-                  </span>
+                  <span className="portfolio-role">Product Designer.</span>
                 </p>
               </div>
             </div>
 
             <nav className="portfolio-nav" aria-label="Primary">
-              <a
-                className="portfolio-nav-link is-active"
-                href="/"
-                aria-current="page"
+              <button
+                type="button"
+                className={`portfolio-nav-link${activeTab === "work" ? " is-active" : ""}`}
+                aria-current={activeTab === "work" ? "page" : undefined}
+                onClick={() => selectTab("work")}
               >
                 work
-              </a>
-              <a className="portfolio-nav-link" href="#about">
+              </button>
+              <button
+                type="button"
+                className={`portfolio-nav-link${activeTab === "about" ? " is-active" : ""}`}
+                aria-current={activeTab === "about" ? "page" : undefined}
+                onClick={() => selectTab("about")}
+              >
                 about
-              </a>
+              </button>
               <a className="portfolio-nav-link" href="#writings">
                 writings
               </a>
@@ -103,51 +123,75 @@ export function Portfolio() {
           </header>
 
           <div className="portfolio-content">
-            <section
-              className="portfolio-section"
-              aria-labelledby="industry-label"
-            >
-              <h2 className="portfolio-section-label" id="industry-label">
-                Industry
-              </h2>
-              <ul className="portfolio-project-list">
-                {industryProjects.map((project) => (
-                  <ProjectListItem
-                    key={project.id}
-                    project={project}
-                    isActive={activeProject?.id === project.id}
-                    onActivate={() => setActiveProject(project)}
-                    onDeactivate={() => setActiveProject(null)}
-                  />
-                ))}
-              </ul>
-            </section>
+            {activeTab === "work" ? (
+              <>
+                <section
+                  className="portfolio-section"
+                  aria-labelledby="industry-label"
+                >
+                  <h2 className="portfolio-section-label" id="industry-label">
+                    Industry
+                  </h2>
+                  <ul className="portfolio-project-list">
+                    {industryProjects.map((project) => (
+                      <ProjectListItem
+                        key={project.id}
+                        item={project}
+                        isActive={activeItem?.id === project.id}
+                        onActivate={() => setActiveItem(project)}
+                        onDeactivate={() => setActiveItem(null)}
+                      />
+                    ))}
+                  </ul>
+                </section>
 
-            <hr className="portfolio-divider" />
+                <hr className="portfolio-divider" />
 
-            <section
-              className="portfolio-section"
-              aria-labelledby="personal-label"
-            >
-              <h2 className="portfolio-section-label" id="personal-label">
-                Personal
-              </h2>
-              <ul className="portfolio-project-list">
-                {personalProjects.map((project) => (
-                  <ProjectListItem
-                    key={project.id}
-                    project={project}
-                    isActive={activeProject?.id === project.id}
-                    onActivate={() => setActiveProject(project)}
-                    onDeactivate={() => setActiveProject(null)}
-                  />
-                ))}
-              </ul>
-            </section>
+                <section
+                  className="portfolio-section"
+                  aria-labelledby="personal-label"
+                >
+                  <h2 className="portfolio-section-label" id="personal-label">
+                    Personal
+                  </h2>
+                  <ul className="portfolio-project-list">
+                    {personalProjects.map((project) => (
+                      <ProjectListItem
+                        key={project.id}
+                        item={project}
+                        isActive={activeItem?.id === project.id}
+                        onActivate={() => setActiveItem(project)}
+                        onDeactivate={() => setActiveItem(null)}
+                      />
+                    ))}
+                  </ul>
+                </section>
+              </>
+            ) : (
+              <section
+                className="portfolio-section"
+                aria-labelledby="about-label"
+              >
+                <h2 className="portfolio-section-label" id="about-label">
+                  learn about me
+                </h2>
+                <ul className="portfolio-project-list">
+                  {aboutTopics.map((topic) => (
+                    <ProjectListItem
+                      key={topic.id}
+                      item={topic}
+                      isActive={activeItem?.id === topic.id}
+                      onActivate={() => setActiveItem(topic)}
+                      onDeactivate={() => setActiveItem(null)}
+                    />
+                  ))}
+                </ul>
+              </section>
+            )}
           </div>
         </motion.div>
 
-        <ProjectPreview project={activeProject} />
+        <ProjectPreview project={activeItem} />
       </div>
     </main>
   );
