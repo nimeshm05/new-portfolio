@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
 import type { Project } from "@/data/projects";
+import { PREVIEW_VIDEO_VARIANTS } from "@/motion";
 import "./ProjectPreview.css";
 
 type ProjectPreviewProps = {
@@ -38,7 +40,7 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
           key={project.id}
         >
           {project.previewVideo ? (
-            <video
+            <motion.video
               ref={videoRef}
               className="project-preview-video"
               src={project.previewVideo}
@@ -46,6 +48,9 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
               loop
               playsInline
               autoPlay
+              variants={PREVIEW_VIDEO_VARIANTS}
+              initial="hidden"
+              animate="show"
             />
           ) : (
             <div className="project-preview-content">

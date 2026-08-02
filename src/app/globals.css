@@ -1,32 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:wght@400;500&display=swap");
 
 :root {
-  /* Tailwind neutral palette */
-  --neutral-50: #fafafa;
-  --neutral-100: #f5f5f5;
-  --neutral-200: #e5e5e5;
-  --neutral-300: #d4d4d4;
-  --neutral-400: #a3a3a3;
-  --neutral-500: #737373;
-  --neutral-600: #525252;
-  --neutral-700: #404040;
-  --neutral-800: #262626;
-  --neutral-900: #171717;
-  --neutral-950: #0a0a0a;
+  /* Tailwind neutral palette (oklch) */
+  --neutral-50: oklch(98.5% 0 0);
+  --neutral-100: oklch(97% 0 0);
+  --neutral-200: oklch(92.2% 0 0);
+  --neutral-300: oklch(87% 0 0);
+  --neutral-400: oklch(70.8% 0 0);
+  --neutral-500: oklch(55.6% 0 0);
+  --neutral-600: oklch(43.9% 0 0);
+  --neutral-700: oklch(37.1% 0 0);
+  --neutral-800: oklch(26.9% 0 0);
+  --neutral-900: oklch(20.5% 0 0);
+  --neutral-950: oklch(14.5% 0 0);
 
   /* Colors */
-  --color-background: #ffffff;
+  --color-background: oklch(100% 0 0);
   --color-foreground: var(--neutral-900);
   --color-secondary: var(--neutral-500);
   --color-muted: var(--neutral-300);
   --color-text-muted: var(--neutral-400);
-  --color-accent: #0084ff;
+  --color-accent: oklch(62.4% 0.206 255.1);
   --color-status: var(--neutral-300);
   --color-divider: var(--neutral-200);
   --color-surface: var(--color-background);
   --color-surface-hover: var(--neutral-50);
   --color-surface-active: var(--neutral-100);
-  --color-preview-shadow: color-mix(in srgb, var(--neutral-950) 8%, transparent);
+  --color-preview-shadow: color-mix(in oklch, var(--neutral-950) 8%, transparent);
 
   /* Typography */
   --font-sans: "Zalando Sans", -apple-system, BlinkMacSystemFont, sans-serif;

@@ -36,6 +36,7 @@ export const projects: Project[] = [
       "self-serve analytics platform for Air Canada contact centre teams.",
     category: "industry",
     icon: ChartPie,
+    previewVideo: "/assets/preview-videos/conversation-insights-banner.mp4",
   },
   {
     id: "architecture-agent",

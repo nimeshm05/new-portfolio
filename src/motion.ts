@@ -14,3 +14,20 @@ export const SIDEBAR_BLUR_VARIANTS = {
     transition: SIDEBAR_BLUR_TRANSITION,
   },
 };
+
+export const PREVIEW_VIDEO_TRANSITION = {
+  duration: 0.05,
+  ease: "easeOut" as const,
+};
+
+export const PREVIEW_VIDEO_VARIANTS = {
+  hidden: {
+    filter: `blur(${SIDEBAR_BLUR})`,
+    scale: 0.9,
+  },
+  show: {
+    filter: "blur(0px)",
+    scale: 1,
+    transition: PREVIEW_VIDEO_TRANSITION,
+  },
+};
