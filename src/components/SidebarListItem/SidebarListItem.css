@@ -1,0 +1,48 @@
+.sidebar-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: var(--size-full);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-item);
+  text-align: left;
+  position: relative;
+  z-index: var(--z-base);
+}
+
+.sidebar-list-item.is-active {
+  z-index: var(--z-active);
+  background-color: var(--color-surface-active);
+}
+
+.sidebar-list-item-icon {
+  flex-shrink: 0;
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  color: var(--color-secondary);
+}
+
+.sidebar-list-item-title {
+  flex: 1 0 0;
+  min-width: 0;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-size);
+  line-height: var(--line-height);
+  color: var(--color-secondary);
+}
+
+.sidebar-list-item-chevron {
+  flex-shrink: 0;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: var(--color-muted);
+}
+
+.sidebar-list-item:hover .sidebar-list-item-icon,
+.sidebar-list-item.is-active .sidebar-list-item-icon,
+.sidebar-list-item:hover .sidebar-list-item-title,
+.sidebar-list-item.is-active .sidebar-list-item-title,
+.sidebar-list-item:hover .sidebar-list-item-chevron,
+.sidebar-list-item.is-active .sidebar-list-item-chevron {
+  color: var(--color-foreground);
+}

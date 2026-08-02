@@ -1,0 +1,32 @@
+.home {
+  display: flex;
+  justify-content: center;
+  height: var(--size-viewport);
+  overflow: hidden;
+  padding: var(--space-none);
+  width: var(--size-full);
+}
+
+.home-layout {
+  display: flex;
+  align-items: stretch;
+  width: var(--size-full);
+  height: var(--size-full);
+}
+
+/* Breakpoint: var(--breakpoint-lg) */
+@media (max-width: 1100px) {
+  .home {
+    height: auto;
+    min-height: var(--size-viewport);
+    overflow: visible;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .home-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2xl);
+    height: auto;
+  }
+}
