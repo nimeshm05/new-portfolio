@@ -19,6 +19,7 @@
   flex-direction: column;
   gap: var(--space-3xl);
   width: var(--sidebar-width);
+  max-width: var(--sidebar-max-width);
   flex-shrink: 0;
   height: var(--size-full);
   overflow-y: auto;
@@ -177,7 +178,7 @@
   align-items: center;
   gap: var(--space-sm);
   width: var(--size-full);
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-item);
   text-align: left;
   position: relative;
@@ -249,6 +250,7 @@
 
   .portfolio-sidebar {
     width: var(--size-full);
+    max-width: var(--size-full);
     height: auto;
     overflow: visible;
     padding-top: var(--space-none);

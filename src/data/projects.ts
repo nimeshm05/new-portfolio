@@ -17,6 +17,8 @@ export type Project = {
   /** Reserved for future thumbnail assets */
   thumbnail?: string;
   tagline?: string;
+  /** Path under /public for hover preview video */
+  previewVideo?: string;
 };
 
 export const projects: Project[] = [
@@ -51,6 +53,7 @@ export const projects: Project[] = [
     category: "personal",
     icon: Music2,
     tagline: "race your frens, one lyric at a time :)",
+    previewVideo: "/assets/preview-videos/kar-no-key.mp4",
   },
   {
     id: "gzlang",
@@ -58,6 +61,7 @@ export const projects: Project[] = [
     description: "transpiler the decodes genz language into javascript.",
     category: "personal",
     icon: CodeXml,
+    previewVideo: "/assets/preview-videos/gzlang-banner.mp4",
   },
   // {
   //   id: "curio",

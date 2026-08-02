@@ -56,12 +56,14 @@
   --icon-size-sm: 16px;
   --icon-size-md: 20px;
   --divider-height: 0.6px;
-  --sidebar-width: 18%;
+  --sidebar-width: var(--size-full);
+  --sidebar-max-width: 18%;
   --content-width: 280px;
   --content-width-mobile: 400px;
   --preview-width: 64%;
   --preview-height: 540px;
   --preview-height-mobile: 280px;
+  --preview-media-size: 90%;
   --page-top: 2%;
   --page-inline: 2%;
 
