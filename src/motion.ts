@@ -32,6 +32,13 @@ export const PREVIEW_VIDEO_VARIANTS = {
   },
 };
 
+export const SIDEBAR_PILL_TRANSITION = {
+  type: "spring" as const,
+  stiffness: 300,
+  damping: 28,
+  mass: 0.85,
+};
+
 export const TAB_CONTENT_BLUR = "2px";
 
 export const TAB_CONTENT_BLUR_VARIANTS = {

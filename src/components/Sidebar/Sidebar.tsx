@@ -6,9 +6,12 @@ import { industryProjects, personalProjects } from "@/data/projects";
 import { aboutTopics } from "@/data/about";
 import { getProjectSections } from "@/data/case-studies";
 import type { DetailItem } from "@/data/details";
-import { SidebarTab } from "@/components/SidebarTab/SidebarTab";
 import { SidebarListItem } from "@/components/SidebarListItem/SidebarListItem";
-import { SIDEBAR_BLUR_VARIANTS, TAB_CONTENT_BLUR_VARIANTS } from "@/motion";
+import {
+  SIDEBAR_BLUR_VARIANTS,
+  SIDEBAR_PILL_TRANSITION,
+  TAB_CONTENT_BLUR_VARIANTS,
+} from "@/motion";
 import "./Sidebar.css";
 
 type Tab = "work" | "about" | "writings";
@@ -73,26 +76,77 @@ export function Sidebar({
           className="sidebar-nav sidebar-nav-segmented"
           aria-label={isProjectSelected ? "Project" : "Primary"}
         >
-          {isProjectSelected ? (
-            <SidebarTab isActive onClick={() => onSelectItem(null)}>
-              Back to Projects
-            </SidebarTab>
-          ) : (
-            <>
-              <SidebarTab
-                isActive={activeTab === "work"}
-                onClick={() => selectTab("work")}
-              >
-                Work
-              </SidebarTab>
-              <SidebarTab
-                isActive={activeTab === "about"}
-                onClick={() => selectTab("about")}
-              >
-                About
-              </SidebarTab>
-            </>
-          )}
+          <div className="sidebar-nav-panel">
+            <motion.div
+              className="sidebar-nav-pill"
+              initial={false}
+              animate={
+                isProjectSelected
+                  ? { left: 0, width: "100%" }
+                  : activeTab === "about"
+                    ? { left: "calc(50% + 1px)", width: "calc(50% - 1px)" }
+                    : { left: 0, width: "calc(50% - 1px)" }
+              }
+              transition={SIDEBAR_PILL_TRANSITION}
+            />
+
+            <button
+              type="button"
+              className={`sidebar-nav-tab${
+                isProjectSelected || activeTab === "work" ? " is-active" : ""
+              }`}
+              aria-current={
+                isProjectSelected || activeTab === "work" ? "page" : undefined
+              }
+              onClick={() =>
+                isProjectSelected ? onSelectItem(null) : selectTab("work")
+              }
+            >
+              <AnimatePresence initial={false} mode="wait">
+                <motion.span
+                  key={isProjectSelected ? "back" : "work"}
+                  className="sidebar-nav-label"
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.22, ease: "easeOut" },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    transition: { duration: 0.12, ease: "easeIn" },
+                  }}
+                >
+                  {isProjectSelected ? "Back to Projects" : "Work"}
+                </motion.span>
+              </AnimatePresence>
+            </button>
+
+            <motion.button
+              type="button"
+              className={`sidebar-nav-tab${activeTab === "about" ? " is-active" : ""}`}
+              aria-current={
+                !isProjectSelected && activeTab === "about" ? "page" : undefined
+              }
+              aria-hidden={isProjectSelected}
+              tabIndex={isProjectSelected ? -1 : 0}
+              initial={false}
+              animate={{
+                flexGrow: isProjectSelected ? 0 : 1,
+                flexBasis: 0,
+                opacity: isProjectSelected
+                  ? 0
+                  : activeTab === "about"
+                    ? 1
+                    : 0.8,
+                paddingLeft: isProjectSelected ? 0 : 12,
+                paddingRight: isProjectSelected ? 0 : 12,
+              }}
+              transition={SIDEBAR_PILL_TRANSITION}
+              onClick={() => selectTab("about")}
+            >
+              About
+            </motion.button>
+          </div>
         </nav>
       </header>
 
