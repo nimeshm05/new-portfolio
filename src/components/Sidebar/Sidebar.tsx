@@ -70,7 +70,7 @@ export function Sidebar({
         </div>
 
         <nav
-          className="sidebar-nav"
+          className="sidebar-nav sidebar-nav-segmented"
           aria-label={isProjectSelected ? "Project" : "Primary"}
         >
           {isProjectSelected ? (
@@ -90,12 +90,6 @@ export function Sidebar({
                 onClick={() => selectTab("about")}
               >
                 About
-              </SidebarTab>
-              <SidebarTab
-                isActive={activeTab === "writings"}
-                onClick={() => selectTab("writings")}
-              >
-                Writings
               </SidebarTab>
             </>
           )}
@@ -144,7 +138,7 @@ export function Sidebar({
                   aria-labelledby="industry-label"
                 >
                   <h2 className="sidebar-section-label" id="industry-label">
-                    Industry
+                    Industry Projects
                   </h2>
                   <ul className="sidebar-list">
                     {industryProjects.map((project) => (
@@ -173,7 +167,7 @@ export function Sidebar({
                   aria-labelledby="personal-label"
                 >
                   <h2 className="sidebar-section-label" id="personal-label">
-                    Personal
+                    Personal Projects
                   </h2>
                   <ul className="sidebar-list">
                     {personalProjects.map((project) => (

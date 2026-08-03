@@ -24,6 +24,7 @@
 .sidebar-tab.is-active {
   color: var(--color-foreground);
   background: var(--color-surface-active);
+  box-shadow: var(--shadow-tab);
 }
 
 .sidebar-tab.is-active:hover {

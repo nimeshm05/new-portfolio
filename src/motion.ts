@@ -32,7 +32,7 @@ export const PREVIEW_VIDEO_VARIANTS = {
   },
 };
 
-export const TAB_CONTENT_BLUR = "4px";
+export const TAB_CONTENT_BLUR = "2px";
 
 export const TAB_CONTENT_BLUR_VARIANTS = {
   hidden: {

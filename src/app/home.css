@@ -5,7 +5,7 @@
   overflow: hidden;
   padding: var(--space-none);
   width: var(--size-full);
-  background: var(--neutral-200);
+  background: var(--neutral-50);
 }
 
 .home-layout {
@@ -23,7 +23,6 @@
   flex: 1 1 auto;
   min-width: 0;
   align-self: stretch;
-  background: var(--neutral-100);
 }
 
 /* Breakpoint: var(--breakpoint-lg) */

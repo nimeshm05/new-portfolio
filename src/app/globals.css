@@ -78,6 +78,12 @@
   --opacity-full: 1;
   --shadow-blur: 20px;
   --shadow-preview: 0 0 var(--shadow-blur) 0 var(--color-preview-shadow);
+  --shadow-tab-ring-width: 0.2px;
+  --shadow-tab-ring-color: lch(0% 0 0 / 0.09);
+  --shadow-tab-elevation: 0px 3px 6px -2px lch(0% 0 0 / 0.02),
+    0px 1px 1px lch(0% 0 0 / 0.04);
+  --shadow-tab: 0 0 0 var(--shadow-tab-ring-width) var(--shadow-tab-ring-color),
+    var(--shadow-tab-elevation);
 
   /* Z-index */
   --z-base: 0;
