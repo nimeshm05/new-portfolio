@@ -15,23 +15,6 @@ export const SIDEBAR_BLUR_VARIANTS = {
   },
 };
 
-export const PREVIEW_VIDEO_TRANSITION = {
-  duration: 0.08,
-  ease: "easeOut" as const,
-};
-
-export const PREVIEW_VIDEO_VARIANTS = {
-  hidden: {
-    filter: `blur(${SIDEBAR_BLUR})`,
-    scale: 0.9,
-  },
-  show: {
-    filter: "blur(0px)",
-    scale: 1,
-    transition: PREVIEW_VIDEO_TRANSITION,
-  },
-};
-
 export const SIDEBAR_PILL_TRANSITION = {
   type: "spring" as const,
   stiffness: 300,
@@ -68,26 +51,25 @@ export const TAB_CONTENT_BLUR_VARIANTS = {
   },
 };
 
-/** In-place media crossfade for project details (opacity + blur only). */
-export const DETAILS_MEDIA_VARIANTS = {
-  hidden: {
-    opacity: 0,
-    filter: `blur(${TAB_CONTENT_BLUR})`,
+const SLIDE_EASE = [0.32, 0.72, 0, 1] as const;
+
+/** Sidebar slides left on project open, right on close. */
+export const PAGE_SLIDE_TRANSITION = {
+  duration: 0.36,
+  ease: SLIDE_EASE,
+};
+
+export const SIDEBAR_RAIL_VARIANTS = {
+  open: {
+    x: 0,
+    flexBasis: "18%",
+    maxWidth: "18%",
+    transition: PAGE_SLIDE_TRANSITION,
   },
-  show: {
-    opacity: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.22,
-      ease: "easeOut" as const,
-    },
-  },
-  exit: {
-    opacity: 0,
-    filter: `blur(${TAB_CONTENT_BLUR})`,
-    transition: {
-      duration: 0.1,
-      ease: "easeIn" as const,
-    },
+  closed: {
+    x: "-100%",
+    flexBasis: 0,
+    maxWidth: 0,
+    transition: PAGE_SLIDE_TRANSITION,
   },
 };

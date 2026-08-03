@@ -5,9 +5,8 @@ import {
   Bot,
   Music2,
   CodeXml,
-  Sparkles,
 } from "lucide-react";
-import type { MediaTone } from "@/data/details";
+import type { MediaTone, ProjectMeta } from "@/data/details";
 
 export type Project = {
   id: string;
@@ -22,6 +21,8 @@ export type Project = {
   previewVideo?: string;
   /** Optional color grade for details media */
   mediaTone?: MediaTone;
+  /** Metadata shown in hover preview and project details */
+  meta?: ProjectMeta;
 };
 
 export const projects: Project[] = [
@@ -31,6 +32,10 @@ export const projects: Project[] = [
     description: "reimagining how lawyers respond to discovery questions.",
     category: "industry",
     icon: MessageCircleMore,
+    meta: {
+      type: "Product",
+      role: "Product Designer",
+    },
   },
   {
     id: "conversation-insights",
@@ -41,6 +46,13 @@ export const projects: Project[] = [
     icon: ChartPie,
     previewVideo: "/assets/preview-videos/conversation-insights-banner.mp4",
     mediaTone: "blue",
+    meta: {
+      company: "RozieAI",
+      timeline: "Q3 2024 - Q3 2025",
+      type: "Intern Tool",
+      client: "Air Canada",
+      role: "Product Designer",
+    },
   },
   {
     id: "architecture-agent",
@@ -50,6 +62,10 @@ export const projects: Project[] = [
     category: "industry",
     icon: Bot,
     previewVideo: "/assets/preview-videos/actual-ai-banner.mp4",
+    meta: {
+      type: "Research",
+      role: "Product Designer",
+    },
   },
   {
     id: "kar-no-key",
@@ -60,6 +76,10 @@ export const projects: Project[] = [
     icon: Music2,
     tagline: "race your frens, one lyric at a time :)",
     previewVideo: "/assets/preview-videos/kar-no-key.mp4",
+    meta: {
+      type: "Personal",
+      role: "Designer / Engineer",
+    },
   },
   {
     id: "gzlang",
@@ -69,15 +89,11 @@ export const projects: Project[] = [
     icon: CodeXml,
     previewVideo: "/assets/preview-videos/gzlang-banner.mp4",
     mediaTone: "lime",
+    meta: {
+      type: "Personal",
+      role: "Designer / Engineer",
+    },
   },
-  // {
-  //   id: "curio",
-  //   title: "curio",
-  //   description:
-  //     "usability studies on architecture agent feature with actual ai.",
-  //   category: "personal",
-  //   icon: Sparkles,
-  // },
 ];
 
 export const industryProjects = projects.filter(

@@ -1,6 +1,7 @@
 import { SidebarTab } from "@/components/SidebarTab/SidebarTab";
 import { TextDropdown } from "@/components/TextDropdown/TextDropdown";
 import { IconButton } from "@/components/IconButton/IconButton";
+import type { CaseStudySection } from "@/data/case-studies";
 import "./ProjectDetailsNavbar.css";
 
 export type DetailsViewMode = "quick-read" | "deep-dive";
@@ -9,12 +10,20 @@ type ProjectDetailsNavbarProps = {
   viewMode: DetailsViewMode;
   onViewModeChange: (mode: DetailsViewMode) => void;
   onClose: () => void;
+  showClose?: boolean;
+  sections?: CaseStudySection[];
+  activeSectionId?: string | null;
+  onSelectSection?: (sectionId: string) => void;
 };
 
 export function ProjectDetailsNavbar({
   viewMode,
   onViewModeChange,
   onClose,
+  showClose = false,
+  sections = [],
+  activeSectionId = null,
+  onSelectSection,
 }: ProjectDetailsNavbarProps) {
   return (
     <header className="project-details-navbar">
@@ -34,8 +43,18 @@ export function ProjectDetailsNavbar({
       </nav>
 
       <div className="project-details-navbar-actions">
-        {/* <TextDropdown label="Sections" /> */}
-        <IconButton aria-label="Close details" onClick={onClose} />
+        <TextDropdown
+          label="Sections"
+          options={sections.map((section) => ({
+            id: section.id,
+            label: section.title,
+          }))}
+          activeOptionId={activeSectionId}
+          onSelectOption={onSelectSection}
+        />
+        {showClose ? (
+          <IconButton aria-label="Close details" onClick={onClose} />
+        ) : null}
       </div>
     </header>
   );

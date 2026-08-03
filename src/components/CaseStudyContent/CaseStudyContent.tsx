@@ -12,11 +12,6 @@ type CaseStudyContentProps = {
   markdown: string;
 };
 
-type MetaField = {
-  label: string;
-  value: string;
-};
-
 function childrenToText(children: ReactNode): string {
   if (typeof children === "string" || typeof children === "number") {
     return String(children);
@@ -43,18 +38,11 @@ function isMediaOnlyParagraph(children: ReactNode): boolean {
   );
 }
 
-/** Prefer design order for the 2×2 meta grid when labels match. */
-const META_ORDER = ["Company", "Timeline", "Client", "Role"];
-
-function parseCaseStudyMarkdown(markdown: string): {
-  meta: MetaField[];
-  body: string;
-} {
+/** Strip leading H1 + **Label:** value meta block; body only. */
+function getCaseStudyBody(markdown: string): string {
   const lines = markdown.replace(/^\uFEFF/, "").split(/\r?\n/);
-  const meta: MetaField[] = [];
   let index = 0;
 
-  // Skip optional H1 title line
   if (lines[index]?.startsWith("# ")) {
     index += 1;
     while (lines[index] !== undefined && lines[index].trim() === "") {
@@ -71,8 +59,6 @@ function parseCaseStudyMarkdown(markdown: string): {
 
     const match = line.match(/^\*\*(.+?):\*\*\s*(.+)$/);
     if (!match) break;
-
-    meta.push({ label: match[1].trim(), value: match[2].trim() });
     index += 1;
   }
 
@@ -80,40 +66,14 @@ function parseCaseStudyMarkdown(markdown: string): {
     index += 1;
   }
 
-  const orderedMeta = [...meta].sort((a, b) => {
-    const ai = META_ORDER.indexOf(a.label);
-    const bi = META_ORDER.indexOf(b.label);
-    if (ai === -1 && bi === -1) return 0;
-    if (ai === -1) return 1;
-    if (bi === -1) return -1;
-    return ai - bi;
-  });
-
-  return {
-    meta: orderedMeta,
-    body: lines.slice(index).join("\n").trim(),
-  };
+  return lines.slice(index).join("\n").trim();
 }
 
 export function CaseStudyContent({ markdown }: CaseStudyContentProps) {
-  const { meta, body } = parseCaseStudyMarkdown(markdown);
+  const body = getCaseStudyBody(markdown);
 
   return (
     <article className="case-study-content">
-      {meta.length > 0 ? (
-        <>
-          <dl className="case-study-meta">
-            {meta.map((field) => (
-              <div key={field.label} className="case-study-meta-item">
-                <dt className="case-study-meta-label">{field.label}</dt>
-                <dd className="case-study-meta-value">{field.value}</dd>
-              </div>
-            ))}
-          </dl>
-          <hr className="case-study-meta-divider" />
-        </>
-      ) : null}
-
       <div className="case-study-body">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -146,6 +106,7 @@ export function CaseStudyContent({ markdown }: CaseStudyContentProps) {
               }
               return <p>{children}</p>;
             },
+            hr: () => <hr className="case-study-divider" />,
           }}
         >
           {body}

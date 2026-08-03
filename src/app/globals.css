@@ -28,16 +28,25 @@
   --color-surface: var(--color-background);
   --color-surface-hover: var(--neutral-100);
   --color-surface-active: var(--neutral-100);
+  --color-media-placeholder: #d9d9d9;
   --color-preview-shadow: color-mix(in oklch, var(--neutral-950) 8%, transparent);
+  --color-card-shadow: rgba(0, 0, 0, 0.12);
+  --color-menu-shadow: rgba(0, 0, 0, 0.08);
 
   /* Typography */
   --font-sans: "Zalando Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --text-size: 15px;
+  --text-size-caption: 14px;
+  --text-size-meta-label: 16px;
+  --text-size-h3: 18px;
+  --text-size-section-title: 20px;
+  --text-size-title: 24px;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --letter-spacing-wide: 0.04em;
   --line-height: 1.5;
   --line-height-body: 24px;
+  --line-height-normal: normal;
 
   /* Spacing */
   --space-2xs: 2px;
@@ -49,6 +58,8 @@
   --space-2xl: 40px;
   --space-3xl: 67px;
   --space-section: 16px;
+  --space-block: 32px;
+  --space-page-y: 80px;
   --space-none: 0;
 
   /* Sizes */
@@ -59,40 +70,58 @@
   --icon-size-sm: 16px;
   --icon-size-md: 20px;
   --divider-height: 0.6px;
+  --border-width: 1px;
   --sidebar-width: var(--size-full);
   --sidebar-max-width: 18%;
+  --sidebar-content-min: min(280px, 18vw);
   --content-width: 280px;
   --content-width-mobile: 400px;
   --preview-width: 64%;
   --preview-height: 540px;
   --preview-height-mobile: 280px;
   --preview-media-size: 90%;
+  --preview-media-min-height: 220px;
+  --preview-media-inset: var(--space-xl);
+  --details-media-max: 1015px;
+  --media-aspect-ratio: 16 / 9;
   --page-top: 2%;
   --page-inline: 2%;
   --case-study-content-max: 720px;
   --case-study-meta-max: 660px;
   --case-study-callout-border: 3px;
+  --dropdown-menu-min-width: 200px;
+  --dropdown-menu-max-height: 320px;
+  --dropdown-menu-padding: 6px;
 
   /* Radius */
   --radius-none: 0;
   --radius-item: 4px;
   --radius-preview: 4px;
+  --radius-card: 8px;
   --radius-full: 50%;
 
   /* Effects */
   --opacity-full: 1;
+  --opacity-disabled: 0.4;
+  --opacity-media-backdrop: 0.35;
+  --opacity-media-backdrop-blue: 0.5;
+  --opacity-media-backdrop-lime: 0.55;
   --shadow-blur: 20px;
   --shadow-preview: 0 0 var(--shadow-blur) 0 var(--color-preview-shadow);
+  --shadow-card: 0 0 2px var(--color-card-shadow);
+  --shadow-menu: 0 8px 24px var(--color-menu-shadow);
   --shadow-tab-ring-width: 0.2px;
   --shadow-tab-ring-color: lch(0% 0 0 / 0.09);
   --shadow-tab-elevation: 0px 3px 6px -2px lch(0% 0 0 / 0.02),
     0px 1px 1px lch(0% 0 0 / 0.04);
   --shadow-tab: 0 0 0 var(--shadow-tab-ring-width) var(--shadow-tab-ring-color),
     var(--shadow-tab-elevation);
+  --transition-icon: transform 0.15s ease;
 
   /* Z-index */
   --z-base: 0;
   --z-active: 1;
+  --z-overlay: 2;
 
   /* Breakpoints (literals required in @media — keep in sync) */
   --breakpoint-lg: 1100px;

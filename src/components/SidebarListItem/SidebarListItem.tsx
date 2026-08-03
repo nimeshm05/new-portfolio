@@ -11,6 +11,8 @@ type SidebarListItemProps = {
   item: SidebarListItemData;
   isActive: boolean;
   onSelect: () => void;
+  onActivate?: () => void;
+  onDeactivate?: () => void;
   showIcon?: boolean;
   showChevron?: boolean;
   number?: number;
@@ -20,13 +22,14 @@ export function SidebarListItem({
   item,
   isActive,
   onSelect,
+  onActivate,
+  onDeactivate,
   showIcon = true,
   showChevron = true,
   number,
 }: SidebarListItemProps) {
   const Icon = item.icon;
-  const label =
-    number != null ? `${number}. ${item.title}` : item.title;
+  const label = number != null ? `${number}. ${item.title}` : item.title;
 
   return (
     <li>
@@ -34,6 +37,10 @@ export function SidebarListItem({
         type="button"
         className={`sidebar-list-item${isActive ? " is-active" : ""}`}
         onClick={onSelect}
+        onMouseEnter={onActivate}
+        onMouseLeave={onDeactivate}
+        onFocus={onActivate}
+        onBlur={onDeactivate}
       >
         {showIcon && Icon ? (
           <Icon

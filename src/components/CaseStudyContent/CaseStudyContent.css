@@ -3,49 +3,9 @@
   flex-direction: column;
   gap: var(--space-2xl);
   width: var(--size-full);
+  max-width: var(--case-study-content-max);
   padding: var(--space-none) var(--space-none) var(--space-2xl);
   color: var(--color-foreground);
-}
-
-.case-study-meta {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-lg);
-  width: var(--size-full);
-  max-width: var(--case-study-meta-max);
-  margin: var(--space-none);
-  padding: var(--space-md);
-}
-
-.case-study-meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  margin: var(--space-none);
-  min-width: 0;
-}
-
-.case-study-meta-label {
-  margin: var(--space-none);
-  font-weight: var(--font-weight-medium);
-  font-size: 16px;
-  line-height: normal;
-  color: var(--color-foreground);
-}
-
-.case-study-meta-value {
-  margin: var(--space-none);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--text-size);
-  line-height: var(--line-height-body);
-  color: var(--color-secondary);
-}
-
-.case-study-meta-divider {
-  width: var(--size-full);
-  border: none;
-  border-top: 1px solid var(--color-divider);
-  margin: var(--space-none);
 }
 
 .case-study-body {
@@ -53,12 +13,11 @@
   flex-direction: column;
   gap: var(--space-none);
   width: var(--size-full);
-  max-width: var(--case-study-content-max);
   padding: var(--space-none) var(--space-md);
 }
 
 .case-study-body > * + * {
-  margin-top: 32px;
+  margin-top: var(--space-block);
 }
 
 .case-study-body > *:first-child {
@@ -83,7 +42,7 @@
 .case-study-media-caption {
   margin: var(--space-none);
   font-weight: var(--font-weight-regular);
-  font-size: 14px;
+  font-size: var(--text-size-caption);
   line-height: var(--line-height-body);
   color: var(--color-text-muted);
 }
@@ -91,8 +50,8 @@
 .case-study-body h2 {
   margin: var(--space-none);
   font-weight: var(--font-weight-regular);
-  font-size: 14px;
-  line-height: normal;
+  font-size: var(--text-size-caption);
+  line-height: var(--line-height-normal);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-accent);
@@ -102,9 +61,9 @@
 .case-study-body h2 + p {
   margin-top: var(--space-sm);
   font-weight: var(--font-weight-medium);
-  font-size: 20px;
-  line-height: normal;
-  color: var(--color-foreground);
+  font-size: var(--text-size-section-title);
+  line-height: var(--line-height-normal);
+  color: var(--neutral-900);
 }
 
 .case-study-body p + p {
@@ -114,9 +73,9 @@
 .case-study-body h3 {
   margin: var(--space-none);
   font-weight: var(--font-weight-medium);
-  font-size: 18px;
-  line-height: normal;
-  color: var(--color-foreground);
+  font-size: var(--text-size-h3);
+  line-height: var(--line-height-normal);
+  color: var(--neutral-900);
 }
 
 .case-study-body h3 + p,
@@ -168,7 +127,6 @@
 
 .case-study-callout {
   width: var(--size-full);
-  max-width: var(--case-study-content-max);
   margin: var(--space-none);
   padding: var(--space-none) var(--space-none) var(--space-none) var(--space-md);
   border: none;
@@ -186,7 +144,7 @@
   width: var(--size-full);
   border-collapse: collapse;
   margin: var(--space-sm) var(--space-none);
-  font-size: 14px;
+  font-size: var(--text-size-caption);
 }
 
 .case-study-body thead th {
@@ -210,17 +168,25 @@
   border-bottom: none;
 }
 
-.case-study-body hr {
+.case-study-body hr,
+.case-study-divider {
   width: var(--size-full);
   border: none;
-  border-top: 1px solid var(--color-divider);
+  border-top: var(--border-width) solid var(--color-divider);
   margin: var(--space-sm) var(--space-none);
+}
+
+.case-study-body h2 + p + p {
+  margin-top: var(--space-block);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-body);
 }
 
 /* Breakpoint: var(--breakpoint-lg) */
 @media (max-width: 1100px) {
-  .case-study-meta,
-  .case-study-body {
+  .case-study-content {
     max-width: var(--size-full);
   }
 }
