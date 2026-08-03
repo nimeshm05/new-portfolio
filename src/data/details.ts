@@ -1,6 +1,6 @@
 export type DetailKind = "project" | "about" | "writing";
 
-export type MediaTone = "blue";
+export type MediaTone = "blue" | "lime";
 
 export type DetailItem = {
   id: string;

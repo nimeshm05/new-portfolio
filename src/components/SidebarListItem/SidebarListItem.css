@@ -10,8 +10,16 @@
   z-index: var(--z-base);
 }
 
+.sidebar-list-item:hover {
+  background-color: var(--color-surface-hover);
+}
+
 .sidebar-list-item.is-active {
   z-index: var(--z-active);
+  background-color: var(--color-surface-active);
+}
+
+.sidebar-list-item.is-active:hover {
   background-color: var(--color-surface-active);
 }
 

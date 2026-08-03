@@ -17,14 +17,15 @@
   /* Colors */
   --color-background: oklch(100% 0 0);
   --color-foreground: var(--neutral-900);
-  --color-secondary: var(--neutral-600);
+  --color-secondary: var(--neutral-500);
   --color-muted: var(--neutral-300);
   --color-text-muted: var(--neutral-400);
   --color-accent: oklch(62.4% 0.206 255.1);
+  --color-lime: oklch(90.2% 0.247 131.5); /* #a5fd15 */
   --color-status: var(--neutral-300);
   --color-divider: var(--neutral-200);
   --color-surface: var(--color-background);
-  --color-surface-hover: var(--neutral-50);
+  --color-surface-hover: var(--neutral-100);
   --color-surface-active: var(--neutral-100);
   --color-preview-shadow: color-mix(in oklch, var(--neutral-950) 8%, transparent);
 

@@ -68,6 +68,7 @@ export const projects: Project[] = [
     category: "personal",
     icon: CodeXml,
     previewVideo: "/assets/preview-videos/gzlang-banner.mp4",
+    mediaTone: "lime",
   },
   // {
   //   id: "curio",

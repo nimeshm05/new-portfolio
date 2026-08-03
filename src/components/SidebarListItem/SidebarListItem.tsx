@@ -4,21 +4,29 @@ import "./SidebarListItem.css";
 export type SidebarListItemData = {
   id: string;
   title: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
 };
 
 type SidebarListItemProps = {
   item: SidebarListItemData;
   isActive: boolean;
   onSelect: () => void;
+  showIcon?: boolean;
+  showChevron?: boolean;
+  number?: number;
 };
 
 export function SidebarListItem({
   item,
   isActive,
   onSelect,
+  showIcon = true,
+  showChevron = true,
+  number,
 }: SidebarListItemProps) {
   const Icon = item.icon;
+  const label =
+    number != null ? `${number}. ${item.title}` : item.title;
 
   return (
     <li>
@@ -27,19 +35,23 @@ export function SidebarListItem({
         className={`sidebar-list-item${isActive ? " is-active" : ""}`}
         onClick={onSelect}
       >
-        <Icon
-          className="sidebar-list-item-icon"
-          size={16}
-          strokeWidth={1.75}
-          aria-hidden="true"
-        />
-        <span className="sidebar-list-item-title">{item.title}</span>
-        <ChevronRight
-          className="sidebar-list-item-chevron"
-          size={20}
-          strokeWidth={1.5}
-          aria-hidden="true"
-        />
+        {showIcon && Icon ? (
+          <Icon
+            className="sidebar-list-item-icon"
+            size={16}
+            strokeWidth={1.75}
+            aria-hidden="true"
+          />
+        ) : null}
+        <span className="sidebar-list-item-title">{label}</span>
+        {showChevron ? (
+          <ChevronRight
+            className="sidebar-list-item-chevron"
+            size={20}
+            strokeWidth={1.5}
+            aria-hidden="true"
+          />
+        ) : null}
       </button>
     </li>
   );

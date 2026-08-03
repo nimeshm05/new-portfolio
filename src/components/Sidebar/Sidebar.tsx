@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { industryProjects, personalProjects } from "@/data/projects";
 import { aboutTopics } from "@/data/about";
+import { getProjectSections } from "@/data/case-studies";
 import type { DetailItem } from "@/data/details";
 import { SidebarTab } from "@/components/SidebarTab/SidebarTab";
 import { SidebarListItem } from "@/components/SidebarListItem/SidebarListItem";
@@ -15,10 +16,24 @@ type Tab = "work" | "about" | "writings";
 type SidebarProps = {
   selectedItem: DetailItem | null;
   onSelectItem: (item: DetailItem | null) => void;
+  activeSectionId?: string | null;
+  onSelectSection?: (sectionId: string) => void;
 };
 
-export function Sidebar({ selectedItem, onSelectItem }: SidebarProps) {
+export function Sidebar({
+  selectedItem,
+  onSelectItem,
+  activeSectionId = null,
+  onSelectSection,
+}: SidebarProps) {
   const [activeTab, setActiveTab] = useState<Tab>("work");
+  const isProjectSelected = selectedItem?.kind === "project";
+  const projectSections = isProjectSelected
+    ? getProjectSections(selectedItem.id)
+    : [];
+  const contentKey = isProjectSelected
+    ? `sections-${selectedItem.id}`
+    : activeTab;
 
   function selectTab(tab: Tab) {
     setActiveTab(tab);
@@ -54,39 +69,75 @@ export function Sidebar({ selectedItem, onSelectItem }: SidebarProps) {
           </div>
         </div>
 
-        <nav className="sidebar-nav" aria-label="Primary">
-          <SidebarTab
-            isActive={activeTab === "work"}
-            onClick={() => selectTab("work")}
-          >
-            Work
-          </SidebarTab>
-          <SidebarTab
-            isActive={activeTab === "about"}
-            onClick={() => selectTab("about")}
-          >
-            About
-          </SidebarTab>
-          <SidebarTab
-            isActive={activeTab === "writings"}
-            onClick={() => selectTab("writings")}
-          >
-            Writings
-          </SidebarTab>
+        <nav
+          className="sidebar-nav"
+          aria-label={isProjectSelected ? "Project" : "Primary"}
+        >
+          {isProjectSelected ? (
+            <SidebarTab isActive onClick={() => onSelectItem(null)}>
+              Back to Projects
+            </SidebarTab>
+          ) : (
+            <>
+              <SidebarTab
+                isActive={activeTab === "work"}
+                onClick={() => selectTab("work")}
+              >
+                Work
+              </SidebarTab>
+              <SidebarTab
+                isActive={activeTab === "about"}
+                onClick={() => selectTab("about")}
+              >
+                About
+              </SidebarTab>
+              <SidebarTab
+                isActive={activeTab === "writings"}
+                onClick={() => selectTab("writings")}
+              >
+                Writings
+              </SidebarTab>
+            </>
+          )}
         </nav>
       </header>
 
       <div className="sidebar-content-stage">
         <AnimatePresence initial={false}>
           <motion.div
-            key={activeTab}
+            key={contentKey}
             className="sidebar-content"
             variants={TAB_CONTENT_BLUR_VARIANTS}
             initial="hidden"
             animate="show"
             exit="exit"
           >
-            {activeTab === "work" ? (
+            {isProjectSelected ? (
+              <section
+                className="sidebar-section"
+                aria-labelledby="project-sections-label"
+              >
+                <h2
+                  className="sidebar-section-label"
+                  id="project-sections-label"
+                >
+                  Project Sections
+                </h2>
+                <ul className="sidebar-list">
+                  {projectSections.map((section, index) => (
+                    <SidebarListItem
+                      key={section.id}
+                      item={section}
+                      isActive={activeSectionId === section.id}
+                      showIcon={false}
+                      showChevron={false}
+                      number={index + 1}
+                      onSelect={() => onSelectSection?.(section.id)}
+                    />
+                  ))}
+                </ul>
+              </section>
+            ) : activeTab === "work" ? (
               <>
                 <section
                   className="sidebar-section"

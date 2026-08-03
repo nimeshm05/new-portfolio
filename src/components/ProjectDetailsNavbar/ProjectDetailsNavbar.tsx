@@ -23,18 +23,18 @@ export function ProjectDetailsNavbar({
           isActive={viewMode === "quick-read"}
           onClick={() => onViewModeChange("quick-read")}
         >
-          quick read
+          Quick Read
         </SidebarTab>
         <SidebarTab
           isActive={viewMode === "deep-dive"}
           onClick={() => onViewModeChange("deep-dive")}
         >
-          deep dive
+          Deep Dive
         </SidebarTab>
       </nav>
 
       <div className="project-details-navbar-actions">
-        <TextDropdown label="Sections" />
+        {/* <TextDropdown label="Sections" /> */}
         <IconButton aria-label="Close details" onClick={onClose} />
       </div>
     </header>

@@ -56,6 +56,19 @@
   filter: sepia(0.35) hue-rotate(180deg) saturate(1.4);
 }
 
+.project-details-media.is-lime .project-details-media-backdrop {
+  background-image:
+    linear-gradient(
+      color-mix(in oklch, var(--color-lime) 22%, white 55%),
+      color-mix(in oklch, var(--color-lime) 22%, white 55%)
+    ),
+    url("/assets/banner-background.jpeg");
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-blend-mode: soft-light, normal;
+}
+
 .project-details-video-layer {
   position: absolute;
   inset: var(--space-lg);

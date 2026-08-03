@@ -4,21 +4,83 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import type { DetailItem } from "@/data/details";
 import {
+  getCaseStudyMarkdown,
+  getCaseStudyQuickRead,
+} from "@/data/case-studies";
+import {
   ProjectDetailsNavbar,
   type DetailsViewMode,
 } from "@/components/ProjectDetailsNavbar/ProjectDetailsNavbar";
+import { CaseStudyContent } from "@/components/CaseStudyContent/CaseStudyContent";
 import { DETAILS_MEDIA_VARIANTS } from "@/motion";
 import "./ProjectDetails.css";
 
 type ProjectDetailsProps = {
   item: DetailItem;
   onClose: () => void;
+  sectionTarget?: string | null;
+  onSectionScrolled?: () => void;
+  onActiveSectionChange?: (sectionId: string | null) => void;
 };
 
-export function ProjectDetails({ item, onClose }: ProjectDetailsProps) {
+export function ProjectDetails({
+  item,
+  onClose,
+  sectionTarget = null,
+  onSectionScrolled,
+  onActiveSectionChange,
+}: ProjectDetailsProps) {
   const [viewMode, setViewMode] = useState<DetailsViewMode>("quick-read");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const hasVideo = Boolean(item.previewVideo);
+  const caseStudyMarkdown = getCaseStudyMarkdown(item.id);
+  const renderedMarkdown =
+    caseStudyMarkdown == null
+      ? null
+      : viewMode === "quick-read"
+        ? getCaseStudyQuickRead(caseStudyMarkdown)
+        : caseStudyMarkdown;
+
+  useEffect(() => {
+    setViewMode("quick-read");
+    onActiveSectionChange?.(null);
+  }, [item.id, onActiveSectionChange]);
+
+  useEffect(() => {
+    if (!sectionTarget) return;
+
+    if (viewMode !== "deep-dive") {
+      setViewMode("deep-dive");
+      return;
+    }
+
+    const body = bodyRef.current;
+    if (!body) return;
+
+    const frame = requestAnimationFrame(() => {
+      const target = body.querySelector<HTMLElement>(
+        `#${CSS.escape(sectionTarget)}`,
+      );
+      if (!target) {
+        onSectionScrolled?.();
+        return;
+      }
+
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      onActiveSectionChange?.(sectionTarget);
+      onSectionScrolled?.();
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [
+    sectionTarget,
+    viewMode,
+    item.id,
+    renderedMarkdown,
+    onSectionScrolled,
+    onActiveSectionChange,
+  ]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -42,7 +104,7 @@ export function ProjectDetails({ item, onClose }: ProjectDetailsProps) {
         onClose={onClose}
       />
 
-      <div className="project-details-body">
+      <div className="project-details-body" ref={bodyRef}>
         <div className="project-details-media-wrap">
           <div
             className={`project-details-media${item.mediaTone ? ` is-${item.mediaTone}` : ""}`}
@@ -75,6 +137,12 @@ export function ProjectDetails({ item, onClose }: ProjectDetailsProps) {
         <div className="project-details-title-wrap">
           <h1 className="project-details-title">{item.title}</h1>
         </div>
+        {renderedMarkdown ? (
+          <CaseStudyContent
+            key={`${item.id}-${viewMode}`}
+            markdown={renderedMarkdown}
+          />
+        ) : null}
       </div>
     </section>
   );
