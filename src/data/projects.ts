@@ -7,6 +7,7 @@ import {
   CodeXml,
   Sparkles,
 } from "lucide-react";
+import type { MediaTone } from "@/data/details";
 
 export type Project = {
   id: string;
@@ -19,6 +20,8 @@ export type Project = {
   tagline?: string;
   /** Path under /public for hover preview video */
   previewVideo?: string;
+  /** Optional color grade for details media */
+  mediaTone?: MediaTone;
 };
 
 export const projects: Project[] = [
@@ -37,6 +40,7 @@ export const projects: Project[] = [
     category: "industry",
     icon: ChartPie,
     previewVideo: "/assets/preview-videos/conversation-insights-banner.mp4",
+    mediaTone: "blue",
   },
   {
     id: "architecture-agent",

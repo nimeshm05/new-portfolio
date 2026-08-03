@@ -1,0 +1,28 @@
+.project-details-navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-active);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  width: var(--size-full);
+  padding: var(--space-md);
+  background: var(--color-background);
+  border-bottom: 1px solid var(--neutral-100);
+  flex-shrink: 0;
+}
+
+.project-details-navbar-tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.project-details-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex-shrink: 0;
+}

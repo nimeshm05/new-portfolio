@@ -60,3 +60,27 @@ export const TAB_CONTENT_BLUR_VARIANTS = {
     },
   },
 };
+
+/** In-place media crossfade for project details (opacity + blur only). */
+export const DETAILS_MEDIA_VARIANTS = {
+  hidden: {
+    opacity: 0,
+    filter: `blur(${TAB_CONTENT_BLUR})`,
+  },
+  show: {
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.22,
+      ease: "easeOut" as const,
+    },
+  },
+  exit: {
+    opacity: 0,
+    filter: `blur(${TAB_CONTENT_BLUR})`,
+    transition: {
+      duration: 0.1,
+      ease: "easeIn" as const,
+    },
+  },
+};

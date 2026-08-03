@@ -5,6 +5,7 @@
   overflow: hidden;
   padding: var(--space-none);
   width: var(--size-full);
+  background: var(--neutral-200);
 }
 
 .home-layout {
@@ -12,6 +13,17 @@
   align-items: stretch;
   width: var(--size-full);
   height: var(--size-full);
+}
+
+.project-details-pane {
+  display: flex;
+  flex-direction: column;
+  width: var(--preview-width);
+  height: var(--size-full);
+  flex: 1 1 auto;
+  min-width: 0;
+  align-self: stretch;
+  background: var(--neutral-50);
 }
 
 /* Breakpoint: var(--breakpoint-lg) */
@@ -28,5 +40,11 @@
     align-items: stretch;
     gap: var(--space-2xl);
     height: auto;
+  }
+
+  .project-details-pane {
+    width: var(--size-full);
+    height: auto;
+    min-height: var(--preview-height-mobile);
   }
 }

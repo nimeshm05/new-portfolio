@@ -1,0 +1,29 @@
+.text-dropdown {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-none);
+  border: none;
+  background: transparent;
+  color: var(--color-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.text-dropdown:hover {
+  color: var(--color-foreground);
+}
+
+.text-dropdown-label {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-size);
+  line-height: var(--line-height);
+  white-space: nowrap;
+}
+
+.text-dropdown-icon {
+  display: block;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  flex-shrink: 0;
+}

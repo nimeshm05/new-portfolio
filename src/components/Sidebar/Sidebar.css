@@ -11,8 +11,9 @@
   -ms-overflow-style: none;
   padding-top: var(--page-top);
   padding-bottom: var(--space-2xl);
-  padding: var(--space-2xl) var(--space-md);
+  padding: var(--space-lg) var(--space-md);
   border-right: 0.6px solid var(--color-divider);
+  background: var(--color-background);
 }
 
 .sidebar::-webkit-scrollbar {

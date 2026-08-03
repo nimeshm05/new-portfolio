@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import type { LucideIcon } from "lucide-react";
 import { industryProjects, personalProjects } from "@/data/projects";
 import { aboutTopics } from "@/data/about";
-import type { PreviewItem } from "@/components/ProjectPreview/ProjectPreview";
+import type { DetailItem } from "@/data/details";
 import { SidebarTab } from "@/components/SidebarTab/SidebarTab";
 import { SidebarListItem } from "@/components/SidebarListItem/SidebarListItem";
 import { SIDEBAR_BLUR_VARIANTS, TAB_CONTENT_BLUR_VARIANTS } from "@/motion";
@@ -13,21 +12,17 @@ import "./Sidebar.css";
 
 type Tab = "work" | "about" | "writings";
 
-export type SidebarItem = PreviewItem & {
-  icon: LucideIcon;
-};
-
 type SidebarProps = {
-  activeItem: SidebarItem | null;
-  onActiveItemChange: (item: SidebarItem | null) => void;
+  selectedItem: DetailItem | null;
+  onSelectItem: (item: DetailItem | null) => void;
 };
 
-export function Sidebar({ activeItem, onActiveItemChange }: SidebarProps) {
+export function Sidebar({ selectedItem, onSelectItem }: SidebarProps) {
   const [activeTab, setActiveTab] = useState<Tab>("work");
 
   function selectTab(tab: Tab) {
     setActiveTab(tab);
-    onActiveItemChange(null);
+    onSelectItem(null);
   }
 
   return (
@@ -91,77 +86,99 @@ export function Sidebar({ activeItem, onActiveItemChange }: SidebarProps) {
             animate="show"
             exit="exit"
           >
-          {activeTab === "work" ? (
-            <>
+            {activeTab === "work" ? (
+              <>
+                <section
+                  className="sidebar-section"
+                  aria-labelledby="industry-label"
+                >
+                  <h2 className="sidebar-section-label" id="industry-label">
+                    Industry
+                  </h2>
+                  <ul className="sidebar-list">
+                    {industryProjects.map((project) => (
+                      <SidebarListItem
+                        key={project.id}
+                        item={project}
+                        isActive={selectedItem?.id === project.id}
+                        onSelect={() =>
+                          onSelectItem({
+                            id: project.id,
+                            title: project.title,
+                            kind: "project",
+                            previewVideo: project.previewVideo,
+                            mediaTone: project.mediaTone,
+                          })
+                        }
+                      />
+                    ))}
+                  </ul>
+                </section>
+
+                <hr className="sidebar-divider" />
+
+                <section
+                  className="sidebar-section"
+                  aria-labelledby="personal-label"
+                >
+                  <h2 className="sidebar-section-label" id="personal-label">
+                    Personal
+                  </h2>
+                  <ul className="sidebar-list">
+                    {personalProjects.map((project) => (
+                      <SidebarListItem
+                        key={project.id}
+                        item={project}
+                        isActive={selectedItem?.id === project.id}
+                        onSelect={() =>
+                          onSelectItem({
+                            id: project.id,
+                            title: project.title,
+                            kind: "project",
+                            previewVideo: project.previewVideo,
+                            mediaTone: project.mediaTone,
+                          })
+                        }
+                      />
+                    ))}
+                  </ul>
+                </section>
+              </>
+            ) : activeTab === "about" ? (
               <section
                 className="sidebar-section"
-                aria-labelledby="industry-label"
+                aria-labelledby="about-label"
               >
-                <h2 className="sidebar-section-label" id="industry-label">
-                  Industry
+                <h2 className="sidebar-section-label" id="about-label">
+                  Learn About Me
                 </h2>
                 <ul className="sidebar-list">
-                  {industryProjects.map((project) => (
+                  {aboutTopics.map((topic) => (
                     <SidebarListItem
-                      key={project.id}
-                      item={project}
-                      isActive={activeItem?.id === project.id}
-                      onActivate={() => onActiveItemChange(project)}
-                      onDeactivate={() => onActiveItemChange(null)}
+                      key={topic.id}
+                      item={topic}
+                      isActive={selectedItem?.id === topic.id}
+                      onSelect={() =>
+                        onSelectItem({
+                          id: topic.id,
+                          title: topic.title,
+                          kind: "about",
+                        })
+                      }
                     />
                   ))}
                 </ul>
               </section>
-
-              <hr className="sidebar-divider" />
-
+            ) : (
               <section
                 className="sidebar-section"
-                aria-labelledby="personal-label"
+                aria-labelledby="writings-label"
               >
-                <h2 className="sidebar-section-label" id="personal-label">
-                  Personal
+                <h2 className="sidebar-section-label" id="writings-label">
+                  Coming soon
                 </h2>
-                <ul className="sidebar-list">
-                  {personalProjects.map((project) => (
-                    <SidebarListItem
-                      key={project.id}
-                      item={project}
-                      isActive={activeItem?.id === project.id}
-                      onActivate={() => onActiveItemChange(project)}
-                      onDeactivate={() => onActiveItemChange(null)}
-                    />
-                  ))}
-                </ul>
               </section>
-            </>
-          ) : activeTab === "about" ? (
-            <section className="sidebar-section" aria-labelledby="about-label">
-              <h2 className="sidebar-section-label" id="about-label">
-                Learn About Me
-              </h2>
-              <ul className="sidebar-list">
-                {aboutTopics.map((topic) => (
-                  <SidebarListItem
-                    key={topic.id}
-                    item={topic}
-                    isActive={activeItem?.id === topic.id}
-                    onActivate={() => onActiveItemChange(topic)}
-                    onDeactivate={() => onActiveItemChange(null)}
-                  />
-                ))}
-              </ul>
-            </section>
-          ) : (
-            <section
-              className="sidebar-section"
-              aria-labelledby="writings-label"
-            >
-              <h2 className="sidebar-section-label" id="writings-label">
-                Coming soon
-              </h2>
-            </section>
-          )}
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

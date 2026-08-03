@@ -1,0 +1,108 @@
+.project-details {
+  display: flex;
+  flex-direction: column;
+  width: var(--preview-width);
+  height: var(--size-full);
+  flex: 1 1 auto;
+  min-width: 0;
+  align-self: stretch;
+  background: var(--neutral-100);
+  overflow: hidden;
+}
+
+.project-details-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: var(--size-full);
+  padding: var(--space-md) var(--space-none);
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.project-details-body::-webkit-scrollbar {
+  display: none;
+}
+
+.project-details-media-wrap {
+  display: flex;
+  flex-direction: column;
+  width: var(--size-full);
+  padding: var(--space-none) var(--space-md);
+}
+
+.project-details-media {
+  position: relative;
+  width: var(--size-full);
+  height: 600px;
+  background-color: var(--color-background);
+  border: 0.6px solid var(--color-divider);
+  overflow: hidden;
+}
+
+.project-details-media-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/banner-background.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.project-details-media.is-blue .project-details-media-backdrop {
+  filter: sepia(0.35) hue-rotate(180deg) saturate(1.4);
+}
+
+.project-details-video-layer {
+  position: absolute;
+  inset: var(--space-lg);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+}
+
+.project-details-video {
+  display: block;
+  max-width: var(--size-full);
+  max-height: var(--size-full);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: var(--color-background);
+  box-shadow: var(--shadow-preview);
+}
+
+.project-details-title-wrap {
+  display: flex;
+  flex-direction: column;
+  width: var(--size-full);
+  padding: var(--space-md);
+}
+
+.project-details-title {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-medium);
+  font-size: 24px;
+  line-height: var(--line-height);
+  color: var(--color-foreground);
+}
+
+/* Breakpoint: var(--breakpoint-lg) */
+@media (max-width: 1100px) {
+  .project-details {
+    width: var(--size-full);
+    height: auto;
+    max-height: var(--size-viewport);
+    min-height: var(--preview-height-mobile);
+  }
+
+  .project-details-media {
+    height: var(--preview-height-mobile);
+  }
+}
