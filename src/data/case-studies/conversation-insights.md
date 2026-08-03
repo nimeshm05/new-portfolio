@@ -16,7 +16,7 @@ Conversation Insights is a self-serve analytics platform built for Air Canada's 
 - Designed the dashboard interface and core user experience, including the filtering system, reusable components, and key workflows for exploring AI-generated insights.
 - Created and maintained the project's style guide, with reusable components and patterns that contributed to the team's broader design system.
 
-## System Problem
+## Problem
 
 Customer issue investigation was fragmented across reports, systems, and people, which slowed operational decisions.
 
@@ -24,11 +24,17 @@ Before Conversation Insights platform existed, AI-generated insights were delive
 
 Air Canada contact centre teams often moved between reports, AWS Connect portal, and follow-up discussions with RozieAI stakeholders to connect insights with operational data. This fragmented workflow slowed their operational decision-making.
 
-The opportunity was to transform customer issue investigation into a self-serve workflow, enabling contact centre teams to independently understand and act on customer issues.
+![Examples of different tools involved in manual analysis](/assets/conversation-insights/A5%20-%203.svg)
+
+---
+
+> The opportunity was to transform customer issue investigation into a self-serve workflow, enabling contact centre teams to independently understand and act on customer issues.
+
+---
 
 ## Discovery & Insights
 
-Understanding the system — users, data, and how teams analyzed customer issues.
+Understanding the system - users, data, & how teams analyzed customer issues.
 
 Before diving into design, I initiated conversations with RozieAI product owners, data scientists, and Air Canada stakeholders to understand how insights were generated, delivered, and operationalized.
 
@@ -38,15 +44,17 @@ I started here because designing a self-serve workflow without first understandi
 
 The contact centre operations team we were serving mainly consisted of the following two personas:
 
-- Contact centre managers who were mainly interested in knowing the emerging issues and determining where attention was needed.
-- Operation analysts who focused on understanding issues and tracing them back to specific calls in order to deliver operation insights.
+1. Contact centre managers who were mainly interested in knowing the emerging issues and determining where attention was needed.
+2. Operation analysts who focused on understanding issues and tracing them back to specific calls in order to deliver operation insights.
 
 ### What type of data was shared?
 
 By surfacing with the data scientist, I learned the taxonomy of data that was shared with the teams:
 
-- AI-derived signals such as primary topics, root causes, and sentiment helped summarize what customers were experiencing.
-- Operational metadata from the AWS Connect call system, including routing profiles, queues, and agent-level attributes, provided context on who & how those conversations were handled.
+1. AI-derived signals such as primary topics, root causes, and sentiment helped summarize what customers were experiencing.
+2. Operational metadata from the AWS Connect call system, including routing profiles, queues, and agent-level attributes, provided context on who & how those conversations were handled.
+
+![Types of data shared](/assets/conversation-insights/A5%20-%205.svg)
 
 ### How did teams analyze customer issues?
 
@@ -54,21 +62,14 @@ In order to understand how Air Canada contact centre teams approached analyzing 
 
 The teams consistently followed this investigation workflow:
 
-**Investigation Workflow** — Scope → Identify → Understand → Trace
+![Investigation workflow](/assets/conversation-insights/workflow.svg)
 
 This workflow enabled teams to take targeted operational actions such as identifying coaching opportunities for agents and refining IVR routing based on emerging customer issues. Ultimately, this workflow model set the foundation for how the product should be designed.
 
 ### Key Insights
 
-The investigation workflow revealed that insights were not endpoints, but starting points for understanding and resolving customer issues.
-
-**Design Principle:** Support investigation flow, not just consumption.
-
-Teams used call insights to identify issues, then combined it with operational metadata to understand causes, trace impact, and take action.
-
-**Design Principle:** Keep both information layers within the same workflow.
-
-**Design Question:** So, how might we enable Air Canada contact centre teams to independently investigate customer issues from identification to operational action?
+1. The investigation workflow revealed that insights were not endpoints, but starting points for understanding and resolving customer issues.
+2. Teams used call insights to identify issues, then combined it with operational metadata to understand causes, trace impact, and take action.
 
 ## Constraints
 

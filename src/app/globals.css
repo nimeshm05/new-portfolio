@@ -18,9 +18,10 @@
   --color-background: oklch(100% 0 0);
   --color-foreground: var(--neutral-900);
   --color-secondary: var(--neutral-500);
+  --color-body: var(--neutral-600);
   --color-muted: var(--neutral-300);
   --color-text-muted: var(--neutral-400);
-  --color-accent: oklch(62.4% 0.206 255.1);
+  --color-accent: #2679f3;
   --color-lime: oklch(90.2% 0.247 131.5); /* #a5fd15 */
   --color-status: var(--neutral-300);
   --color-divider: var(--neutral-200);
@@ -36,6 +37,7 @@
   --font-weight-medium: 500;
   --letter-spacing-wide: 0.04em;
   --line-height: 1.5;
+  --line-height-body: 24px;
 
   /* Spacing */
   --space-2xs: 2px;
@@ -67,6 +69,9 @@
   --preview-media-size: 90%;
   --page-top: 2%;
   --page-inline: 2%;
+  --case-study-content-max: 720px;
+  --case-study-meta-max: 660px;
+  --case-study-callout-border: 3px;
 
   /* Radius */
   --radius-none: 0;

@@ -1,27 +1,75 @@
 .case-study-content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-2xl);
   width: var(--size-full);
-  padding: var(--space-none) var(--space-md) var(--space-2xl);
+  padding: var(--space-none) var(--space-none) var(--space-2xl);
   color: var(--color-foreground);
 }
 
-.case-study-content > * {
-  max-width: 60%;
+.case-study-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+  width: var(--size-full);
+  max-width: var(--case-study-meta-max);
+  margin: var(--space-none);
+  padding: var(--space-md);
 }
 
-.case-study-content > *:first-child {
+.case-study-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: var(--space-none);
+  min-width: 0;
+}
+
+.case-study-meta-label {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-medium);
+  font-size: 16px;
+  line-height: normal;
+  color: var(--color-foreground);
+}
+
+.case-study-meta-value {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-secondary);
+}
+
+.case-study-meta-divider {
+  width: var(--size-full);
+  border: none;
+  border-top: 1px solid var(--color-divider);
+  margin: var(--space-none);
+}
+
+.case-study-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-none);
+  width: var(--size-full);
+  max-width: var(--case-study-content-max);
+  padding: var(--space-none) var(--space-md);
+}
+
+.case-study-body > * + * {
+  margin-top: 32px;
+}
+
+.case-study-body > *:first-child {
   margin-top: var(--space-none);
 }
 
-.case-study-content > .case-study-media,
-.case-study-content > table {
-  width: var(--size-full);
-  max-width: var(--size-full);
-}
-
 .case-study-media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: var(--size-full);
   margin: var(--space-none);
 }
 
@@ -32,61 +80,116 @@
   height: auto;
 }
 
-.case-study-content h2,
-.case-study-content h3,
-.case-study-content h4 {
-  margin: var(--space-lg) var(--space-none) var(--space-none);
+.case-study-media-caption {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-regular);
+  font-size: 14px;
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
+}
+
+.case-study-body h2 {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-regular);
+  font-size: 14px;
+  line-height: normal;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  scroll-margin-top: var(--space-md);
+}
+
+.case-study-body h2 + p {
+  margin-top: var(--space-sm);
   font-weight: var(--font-weight-medium);
+  font-size: 20px;
+  line-height: normal;
+  color: var(--color-foreground);
+}
+
+.case-study-body p + p {
+  margin-top: var(--line-height-body);
+}
+
+.case-study-body h3 {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-medium);
+  font-size: 18px;
+  line-height: normal;
+  color: var(--color-foreground);
+}
+
+.case-study-body h3 + p,
+.case-study-body h3 + ul,
+.case-study-body h3 + ol {
+  margin-top: var(--space-sm);
+}
+
+.case-study-body h4 {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size);
   line-height: var(--line-height);
   color: var(--color-foreground);
 }
 
-.case-study-content h2 {
-  font-size: 20px;
-  scroll-margin-top: var(--space-md);
-}
-
-.case-study-content h3 {
-  font-size: 17px;
-}
-
-.case-study-content h4 {
-  font-size: var(--text-size);
-}
-
-.case-study-content p {
+.case-study-body p {
   margin: var(--space-none);
-  color: var(--color-secondary);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-body);
 }
 
-.case-study-content strong {
+.case-study-body strong {
   font-weight: var(--font-weight-medium);
   color: var(--color-foreground);
 }
 
-.case-study-content ul,
-.case-study-content ol {
+.case-study-body ul,
+.case-study-body ol {
   margin: var(--space-none);
   padding-left: var(--space-xl);
-  color: var(--color-secondary);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-body);
 }
 
-.case-study-content li {
+.case-study-body li {
   margin: var(--space-xs) var(--space-none);
 }
 
-.case-study-content li + li {
+.case-study-body li + li {
   margin-top: var(--space-sm);
 }
 
-.case-study-content table {
+.case-study-body li::marker {
+  color: var(--color-body);
+}
+
+.case-study-callout {
+  width: var(--size-full);
+  max-width: var(--case-study-content-max);
+  margin: var(--space-none);
+  padding: var(--space-none) var(--space-none) var(--space-none) var(--space-md);
+  border: none;
+  border-left: var(--case-study-callout-border) solid var(--color-accent);
+}
+
+.case-study-callout p {
+  margin: var(--space-none);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-accent);
+}
+
+.case-study-body table {
   width: var(--size-full);
   border-collapse: collapse;
   margin: var(--space-sm) var(--space-none);
   font-size: 14px;
 }
 
-.case-study-content thead th {
+.case-study-body thead th {
   text-align: left;
   font-weight: var(--font-weight-medium);
   color: var(--color-foreground);
@@ -95,28 +198,29 @@
   vertical-align: top;
 }
 
-.case-study-content tbody td {
+.case-study-body tbody td {
   text-align: left;
-  color: var(--color-secondary);
+  color: var(--color-body);
   border-bottom: var(--divider-height) solid var(--color-divider);
   padding: var(--space-md) var(--space-md) var(--space-md) var(--space-none);
   vertical-align: top;
 }
 
-.case-study-content tbody tr:last-child td {
+.case-study-body tbody tr:last-child td {
   border-bottom: none;
 }
 
-.case-study-content hr {
+.case-study-body hr {
   width: var(--size-full);
   border: none;
-  border-top: var(--divider-height) solid var(--color-divider);
-  margin: var(--space-lg) var(--space-none);
+  border-top: 1px solid var(--color-divider);
+  margin: var(--space-sm) var(--space-none);
 }
 
 /* Breakpoint: var(--breakpoint-lg) */
 @media (max-width: 1100px) {
-  .case-study-content > * {
+  .case-study-meta,
+  .case-study-body {
     max-width: var(--size-full);
   }
 }
