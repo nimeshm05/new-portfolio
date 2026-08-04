@@ -3,7 +3,7 @@
   align-items: center;
   gap: var(--space-sm);
   width: var(--size-full);
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-md);
   border-radius: var(--radius-item);
   text-align: left;
   position: relative;
@@ -35,8 +35,8 @@
   min-width: 0;
   font-weight: var(--font-weight-regular);
   font-size: var(--text-size);
-  line-height: var(--line-height);
-  color: var(--color-secondary);
+  line-height: var(--line-height-body);
+  color: var(--color-body);
 }
 
 .sidebar-list-item-chevron {

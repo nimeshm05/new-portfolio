@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { PREVIEW_VIDEO_VARIANTS } from "@/motion";
 import "./ProjectPreview.css";
 
@@ -11,6 +11,7 @@ export type PreviewItem = {
   description: string;
   tagline?: string;
   previewVideo?: string;
+  impact?: string;
 };
 
 type ProjectPreviewProps = {
@@ -37,35 +38,42 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
 
   return (
     <aside
-      className="project-preview"
+      className={`project-preview${project ? " is-visible" : ""}`}
       aria-live="polite"
       aria-hidden={!project}
     >
-      {project?.previewVideo ? (
-        <motion.video
-          key={project.id}
-          ref={videoRef}
-          className="project-preview-video"
-          src={project.previewVideo}
-          muted
-          loop
-          playsInline
-          autoPlay
-          variants={PREVIEW_VIDEO_VARIANTS}
-          initial="hidden"
-          animate="show"
-        />
-      ) : project ? (
-        <div className="project-preview-card" key={project.id}>
-          <div className="project-preview-content">
-            <p className="project-preview-title">{project.title}</p>
-            <p className="project-preview-tagline">
-              {project.tagline ?? project.description}
-            </p>
-            <p className="project-preview-soon">coming soon</p>
-          </div>
-        </div>
-      ) : null}
+      <AnimatePresence mode="wait">
+        {project ? (
+          <motion.div
+            key={project.id}
+            className="project-preview-card"
+            variants={PREVIEW_VIDEO_VARIANTS}
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+          >
+            <div className="project-preview-body">
+              <div className="project-preview-media">
+                {project.previewVideo ? (
+                  <video
+                    ref={videoRef}
+                    className="project-preview-video"
+                    src={project.previewVideo}
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                  />
+                ) : null}
+              </div>
+              <p className="project-preview-description">{project.description}</p>
+            </div>
+            {project.impact ? (
+              <p className="project-preview-impact">Impact: {project.impact}</p>
+            ) : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </aside>
   );
 }

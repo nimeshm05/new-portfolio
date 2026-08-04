@@ -20,6 +20,8 @@ export type Project = {
   tagline?: string;
   /** Path under /public for hover preview video */
   previewVideo?: string;
+  /** Optional impact metric shown in hover preview */
+  impact?: string;
   /** Optional color grade for details media */
   mediaTone?: MediaTone;
 };
@@ -28,9 +30,11 @@ export const projects: Project[] = [
   {
     id: "discovery-responses",
     title: "Discovery Responses",
-    description: "reimagining how lawyers respond to discovery questions.",
+    description:
+      "Helping lawyers respond to discoveries by introducing AI chat experience.",
     category: "industry",
     icon: MessageCircleMore,
+    impact: "DAU +12%",
   },
   {
     id: "conversation-insights",

@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { industryProjects, personalProjects } from "@/data/projects";
+import {
+  industryProjects,
+  personalProjects,
+  type Project,
+} from "@/data/projects";
 import { aboutTopics } from "@/data/about";
 import { getProjectSections } from "@/data/case-studies";
 import type { DetailItem } from "@/data/details";
@@ -19,15 +23,19 @@ type Tab = "work" | "about" | "writings";
 type SidebarProps = {
   selectedItem: DetailItem | null;
   onSelectItem: (item: DetailItem | null) => void;
+  onHoverProject?: (project: Project | null) => void;
   activeSectionId?: string | null;
   onSelectSection?: (sectionId: string) => void;
+  layout?: "centered" | "docked";
 };
 
 export function Sidebar({
   selectedItem,
   onSelectItem,
+  onHoverProject,
   activeSectionId = null,
   onSelectSection,
+  layout = "docked",
 }: SidebarProps) {
   const [activeTab, setActiveTab] = useState<Tab>("work");
   const isProjectSelected = selectedItem?.kind === "project";
@@ -41,11 +49,23 @@ export function Sidebar({
   function selectTab(tab: Tab) {
     setActiveTab(tab);
     onSelectItem(null);
+    onHoverProject?.(null);
+  }
+
+  function selectProject(project: Project) {
+    onHoverProject?.(null);
+    onSelectItem({
+      id: project.id,
+      title: project.title,
+      kind: "project",
+      previewVideo: project.previewVideo,
+      mediaTone: project.mediaTone,
+    });
   }
 
   return (
     <motion.aside
-      className="sidebar"
+      className={`sidebar${layout === "centered" ? " is-centered" : ""}`}
       variants={SIDEBAR_BLUR_VARIANTS}
       initial="hidden"
       animate="show"
@@ -67,7 +87,7 @@ export function Sidebar({
           <div className="sidebar-info">
             <p className="sidebar-name">Nimesh Mohanakrishnan</p>
             <p className="sidebar-roles">
-              <span className="sidebar-role">Product Designer.</span>
+              <span className="sidebar-role">Product Designer</span>
             </p>
           </div>
         </div>
@@ -200,15 +220,9 @@ export function Sidebar({
                         key={project.id}
                         item={project}
                         isActive={selectedItem?.id === project.id}
-                        onSelect={() =>
-                          onSelectItem({
-                            id: project.id,
-                            title: project.title,
-                            kind: "project",
-                            previewVideo: project.previewVideo,
-                            mediaTone: project.mediaTone,
-                          })
-                        }
+                        onSelect={() => selectProject(project)}
+                        onHoverStart={() => onHoverProject?.(project)}
+                        onHoverEnd={() => onHoverProject?.(null)}
                       />
                     ))}
                   </ul>
@@ -229,18 +243,24 @@ export function Sidebar({
                         key={project.id}
                         item={project}
                         isActive={selectedItem?.id === project.id}
-                        onSelect={() =>
-                          onSelectItem({
-                            id: project.id,
-                            title: project.title,
-                            kind: "project",
-                            previewVideo: project.previewVideo,
-                            mediaTone: project.mediaTone,
-                          })
-                        }
+                        onSelect={() => selectProject(project)}
+                        onHoverStart={() => onHoverProject?.(project)}
+                        onHoverEnd={() => onHoverProject?.(null)}
                       />
                     ))}
                   </ul>
+                </section>
+
+                <hr className="sidebar-divider" />
+
+                <section
+                  className="sidebar-section"
+                  aria-labelledby="writing-label"
+                >
+                  <h2 className="sidebar-section-label" id="writing-label">
+                    Writing
+                  </h2>
+                  <p className="sidebar-section-empty">Coming soon</p>
                 </section>
               </>
             ) : activeTab === "about" ? (

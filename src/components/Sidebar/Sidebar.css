@@ -16,6 +16,27 @@
   background: var(--color-background);
 }
 
+.sidebar.is-centered {
+  width: var(--sidebar-centered-width);
+  max-width: var(--size-full);
+  height: auto;
+  max-height: var(--size-full);
+  gap: var(--space-3xl);
+  padding: var(--page-top-centered) var(--space-md);
+  border-right: none;
+  background: transparent;
+}
+
+.sidebar.is-centered .sidebar-nav {
+  width: auto;
+  align-self: flex-start;
+}
+
+.sidebar.is-centered .sidebar-nav-tab {
+  flex: 0 0 80px;
+  width: 80px;
+}
+
 .sidebar::-webkit-scrollbar {
   display: none;
 }
@@ -173,6 +194,10 @@
   width: var(--size-full);
 }
 
+.sidebar.is-centered .sidebar-content {
+  gap: var(--space-lg);
+}
+
 .sidebar-section {
   display: flex;
   flex-direction: column;
@@ -185,7 +210,15 @@
   line-height: var(--line-height);
   color: var(--color-foreground);
   white-space: nowrap;
-  padding: var(--space-none) var(--space-md);
+  padding: var(--space-md);
+}
+
+.sidebar-section-empty {
+  padding: var(--space-md);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-text-muted);
 }
 
 .sidebar-list {
@@ -209,14 +242,21 @@
 
 /* Breakpoint: var(--breakpoint-lg) */
 @media (max-width: 1100px) {
-  .sidebar {
+  .sidebar,
+  .sidebar.is-centered {
     width: var(--size-full);
     max-width: var(--size-full);
     height: auto;
+    max-height: none;
     overflow: visible;
     padding-top: var(--space-none);
     padding-bottom: var(--space-none);
     gap: var(--space-2xl);
+    border-right: none;
+  }
+
+  .sidebar.is-centered {
+    padding: var(--space-none);
   }
 
   .sidebar-content {

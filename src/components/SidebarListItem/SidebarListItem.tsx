@@ -11,6 +11,8 @@ type SidebarListItemProps = {
   item: SidebarListItemData;
   isActive: boolean;
   onSelect: () => void;
+  onHoverStart?: () => void;
+  onHoverEnd?: () => void;
   showIcon?: boolean;
   showChevron?: boolean;
   number?: number;
@@ -20,6 +22,8 @@ export function SidebarListItem({
   item,
   isActive,
   onSelect,
+  onHoverStart,
+  onHoverEnd,
   showIcon = true,
   showChevron = true,
   number,
@@ -34,6 +38,10 @@ export function SidebarListItem({
         type="button"
         className={`sidebar-list-item${isActive ? " is-active" : ""}`}
         onClick={onSelect}
+        onMouseEnter={onHoverStart}
+        onMouseLeave={onHoverEnd}
+        onFocus={onHoverStart}
+        onBlur={onHoverEnd}
       >
         {showIcon && Icon ? (
           <Icon

@@ -47,7 +47,8 @@
   --space-lg: 20px;
   --space-xl: 24px;
   --space-2xl: 40px;
-  --space-3xl: 67px;
+  --space-3xl: 60px;
+  --space-4xl: 67px;
   --space-section: 16px;
   --space-none: 0;
 
@@ -61,13 +62,18 @@
   --divider-height: 0.6px;
   --sidebar-width: var(--size-full);
   --sidebar-max-width: 18%;
+  --sidebar-centered-width: 480px;
   --content-width: 280px;
   --content-width-mobile: 400px;
   --preview-width: 64%;
   --preview-height: 540px;
   --preview-height-mobile: 280px;
   --preview-media-size: 90%;
+  --preview-card-width: 446px;
+  --preview-media-width: 422px;
+  --preview-media-height: 240px;
   --page-top: 2%;
+  --page-top-centered: 120px;
   --page-inline: 2%;
   --case-study-content-max: 720px;
   --case-study-meta-max: 660px;
@@ -77,12 +83,14 @@
   --radius-none: 0;
   --radius-item: 4px;
   --radius-preview: 4px;
+  --radius-preview-media: 2px;
   --radius-full: 50%;
 
   /* Effects */
   --opacity-full: 1;
   --shadow-blur: 20px;
   --shadow-preview: 0 0 var(--shadow-blur) 0 var(--color-preview-shadow);
+  --shadow-preview-media: 0 0 4px 0 var(--color-preview-shadow);
   --shadow-tab-ring-width: 0.2px;
   --shadow-tab-ring-color: lch(0% 0 0 / 0.09);
   --shadow-tab-elevation: 0px 3px 6px -2px lch(0% 0 0 / 0.02),
