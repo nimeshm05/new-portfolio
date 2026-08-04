@@ -7,14 +7,9 @@
 
 ## Overview
 
-Conversation Insights is a self-serve analytics platform built for Air Canada's contact centre teams. Every day, hundreds of thousands of customers call Air Canada's contact centre to resolve their issues. RozieAI's AI models process these calls to identify emerging trends and operational signals. Before the platform existed, these insights were delivered through weekly reports, making it difficult for teams to independently investigate issues, understand their operational impact, and take timely action.
+Conversation Insights is a self-serve analytics platform built for Air Canada's contact centre (CC) teams. Every day, hundreds of thousands of customers call Air Canada's contact centre to resolve their issues. RozieAI's AI models process these calls to identify emerging trends and operational signals. Before the platform existed, these insights were delivered to the Air Canada CC team members through weekly reports which were manually crafted by RozieAI product owners, making it difficult for the members to independently investigate issues, understand their operational impact, and take timely action.
 
-### My Contributions
-
-- Led the end-to-end design of the Conversation Insights dashboard as the sole Product Designer, from early discovery and research through final designs and implementation.
-- Conducted customer interviews and collaborated closely with stakeholders to understand user needs, validate concepts, and shape the overall product direction.
-- Designed the dashboard interface and core user experience, including the filtering system, reusable components, and key workflows for exploring AI-generated insights.
-- Created and maintained the project's style guide, with reusable components and patterns that contributed to the team's broader design system.
+As the product designer on the Conversation Insights team, I led the end-to-end design of a dashboard experience that brought AI-generated insights, operational data into a single self-serve workflow, enabling teams to move from identifying issues to taking operational action without relying on manual reports.
 
 ## Problem
 
@@ -26,11 +21,7 @@ Air Canada contact centre teams often moved between reports, AWS Connect portal,
 
 ![Examples of different tools involved in manual analysis](/assets/conversation-insights/A5%20-%203.svg)
 
----
-
 > The opportunity was to transform customer issue investigation into a self-serve workflow, enabling contact centre teams to independently understand and act on customer issues.
-
----
 
 ## Discovery & Insights
 

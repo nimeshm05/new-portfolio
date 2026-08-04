@@ -28,22 +28,29 @@ export function getCaseStudyMarkdown(id: string): string | undefined {
 }
 
 /**
- * Quick Read: Problem through Discovery & Insights (matches Figma case-study frame).
- * Falls back to content before the first non-Overview H2 when Problem is missing.
+ * Quick Read: Overview through Discovery & Insights (matches Figma frames).
  */
 export function getCaseStudyQuickRead(markdown: string): string {
-  const problemStart = markdown.search(/^## Problem\s*$/m);
-  if (problemStart === -1) {
-    const match = markdown.match(/^([\s\S]*?)(?=\n## (?!Overview\b))/);
-    return (match?.[1] ?? markdown).trim();
+  const overviewStart = markdown.search(/^## Overview\s*$/m);
+  if (overviewStart === -1) {
+    const problemStart = markdown.search(/^## Problem\s*$/m);
+    if (problemStart === -1) {
+      const match = markdown.match(/^([\s\S]*?)(?=\n## (?!Overview\b))/);
+      return (match?.[1] ?? markdown).trim();
+    }
+    const fromProblem = markdown.slice(problemStart);
+    const nextSection = fromProblem.search(/\n## (?!Problem\b|Discovery\b)/);
+    return (
+      nextSection === -1 ? fromProblem : fromProblem.slice(0, nextSection)
+    ).trim();
   }
 
-  const fromProblem = markdown.slice(problemStart);
-  const nextSection = fromProblem.search(
-    /\n## (?!Problem\b|Discovery\b)/,
+  const fromOverview = markdown.slice(overviewStart);
+  const nextSection = fromOverview.search(
+    /\n## (?!Overview\b|Problem\b|Discovery\b)/,
   );
   const content =
-    nextSection === -1 ? fromProblem : fromProblem.slice(0, nextSection);
+    nextSection === -1 ? fromOverview : fromOverview.slice(0, nextSection);
 
   return content.trim();
 }

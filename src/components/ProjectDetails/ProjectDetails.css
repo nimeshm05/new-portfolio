@@ -82,7 +82,7 @@
 
 .project-details-title {
   margin: var(--space-none);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   font-size: var(--text-size-title);
   line-height: var(--line-height-normal);
   color: var(--color-foreground);

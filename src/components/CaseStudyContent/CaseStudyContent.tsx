@@ -1,8 +1,4 @@
-import {
-  Children,
-  isValidElement,
-  type ReactNode,
-} from "react";
+import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { slugifyHeading } from "@/data/case-studies";
@@ -12,56 +8,19 @@ type CaseStudyContentProps = {
   markdown: string;
 };
 
-function childrenToText(children: ReactNode): string {
-  if (typeof children === "string" || typeof children === "number") {
-    return String(children);
-  }
-  if (Array.isArray(children)) {
-    return children.map(childrenToText).join("");
-  }
-  return "";
-}
+type SectionBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "subsection"; title: string; body: string }
+  | { type: "image"; src: string; alt: string }
+  | { type: "callout"; text: string }
+  | { type: "markdown"; text: string };
 
-type HastNode = {
-  type?: string;
-  tagName?: string;
-  value?: string;
-  children?: HastNode[];
+type ParsedSection = {
+  heading: string;
+  isOverview: boolean;
+  headline: string | null;
+  blocks: SectionBlock[];
 };
-
-function isMediaOnlyParagraph(
-  children: ReactNode,
-  node?: HastNode,
-): boolean {
-  if (node?.children) {
-    const elements = node.children.filter((child) => child.type === "element");
-    const hasText = node.children.some(
-      (child) => child.type === "text" && Boolean(child.value?.trim()),
-    );
-
-    if (!hasText && elements.length === 1 && elements[0]?.tagName === "img") {
-      return true;
-    }
-  }
-
-  const nodes = Children.toArray(children).filter((child) => {
-    if (typeof child === "string") return child.trim().length > 0;
-    return true;
-  });
-
-  if (nodes.length !== 1) return false;
-
-  const only = nodes[0];
-  if (!isValidElement(only)) return false;
-
-  const props = only.props as { className?: string; src?: string };
-
-  // react-markdown passes the custom `img` element here (with `src`),
-  // not the rendered <figure> — detect either form.
-  return (
-    props.className === "case-study-media" || typeof props.src === "string"
-  );
-}
 
 /** Strip leading H1 + **Label:** value meta block; body only. */
 function getCaseStudyBody(markdown: string): string {
@@ -94,48 +53,286 @@ function getCaseStudyBody(markdown: string): string {
   return lines.slice(index).join("\n").trim();
 }
 
+function splitMarkdownSections(
+  body: string,
+): { heading: string; content: string }[] {
+  const parts = body.split(/^## /m).filter((part) => part.trim().length > 0);
+
+  return parts.map((part) => {
+    const newline = part.indexOf("\n");
+    if (newline === -1) {
+      return { heading: part.trim(), content: "" };
+    }
+    return {
+      heading: part.slice(0, newline).trim(),
+      content: part.slice(newline + 1).trim(),
+    };
+  });
+}
+
+function isTopBlockStart(line: string): boolean {
+  const trimmed = line.trim();
+  return (
+    trimmed.startsWith("### ") ||
+    trimmed.startsWith("![") ||
+    trimmed.startsWith("> ") ||
+    trimmed === "---" ||
+    trimmed.startsWith("|")
+  );
+}
+
+function parseSection(heading: string, content: string): ParsedSection {
+  const isOverview = /^overview$/i.test(heading);
+  const lines = content.split("\n");
+  let index = 0;
+  let headline: string | null = null;
+  const blocks: SectionBlock[] = [];
+
+  function skipBlank() {
+    while (index < lines.length && lines[index].trim() === "") {
+      index += 1;
+    }
+  }
+
+  function readParagraph(): string {
+    const parts: string[] = [];
+    while (
+      index < lines.length &&
+      lines[index].trim() !== "" &&
+      !isTopBlockStart(lines[index])
+    ) {
+      parts.push(lines[index]);
+      index += 1;
+    }
+    return parts.join("\n").trim();
+  }
+
+  function readUntilNextTopBlock(): string {
+    const start = index;
+    while (index < lines.length) {
+      if (index > start && lines[index].trim() === "") {
+        let peek = index + 1;
+        while (peek < lines.length && lines[peek].trim() === "") {
+          peek += 1;
+        }
+        if (peek >= lines.length || isTopBlockStart(lines[peek])) {
+          break;
+        }
+      }
+      if (index > start && isTopBlockStart(lines[index])) {
+        break;
+      }
+      index += 1;
+    }
+    return lines.slice(start, index).join("\n").trim();
+  }
+
+  skipBlank();
+
+  if (!isOverview && index < lines.length && !isTopBlockStart(lines[index])) {
+    const first = readParagraph();
+    if (first) {
+      headline = first;
+    }
+    skipBlank();
+  }
+
+  while (index < lines.length) {
+    skipBlank();
+    if (index >= lines.length) break;
+
+    const line = lines[index];
+    const trimmed = line.trim();
+
+    if (trimmed === "---") {
+      index += 1;
+      continue;
+    }
+
+    if (trimmed.startsWith("### ")) {
+      const title = trimmed.slice(4).trim();
+      index += 1;
+      skipBlank();
+      const body = readUntilNextTopBlock();
+      blocks.push({ type: "subsection", title, body });
+      continue;
+    }
+
+    if (trimmed.startsWith("![")) {
+      const match = trimmed.match(/^!\[([^\]]*)\]\(([^)]+)\)/);
+      if (match) {
+        blocks.push({ type: "image", alt: match[1], src: match[2] });
+        index += 1;
+        continue;
+      }
+    }
+
+    if (trimmed.startsWith("> ")) {
+      const quoteLines: string[] = [];
+      while (index < lines.length && lines[index].trim().startsWith(">")) {
+        quoteLines.push(lines[index].replace(/^>\s?/, ""));
+        index += 1;
+      }
+      blocks.push({ type: "callout", text: quoteLines.join("\n").trim() });
+      continue;
+    }
+
+    if (trimmed.startsWith("|")) {
+      const table = readUntilNextTopBlock();
+      if (table) {
+        blocks.push({ type: "markdown", text: table });
+      }
+      continue;
+    }
+
+    if (/^\d+\.\s/.test(trimmed) || /^[-*]\s/.test(trimmed)) {
+      const list = readUntilNextTopBlock();
+      if (list) {
+        blocks.push({ type: "markdown", text: list });
+      }
+      continue;
+    }
+
+    const paragraph = readParagraph();
+    if (paragraph) {
+      blocks.push({ type: "paragraph", text: paragraph });
+    }
+  }
+
+  return { heading, isOverview, headline, blocks };
+}
+
+const proseComponents = {
+  h1: () => null,
+  h2: () => null,
+  h3: ({ children }: { children?: ReactNode }) => (
+    <h3 className="case-study-subsection-title">{children}</h3>
+  ),
+  h4: ({ children }: { children?: ReactNode }) => (
+    <h4 className="case-study-h4">{children}</h4>
+  ),
+  p: ({ children }: { children?: ReactNode }) => <p>{children}</p>,
+  ul: ({ children }: { children?: ReactNode }) => <ul>{children}</ul>,
+  ol: ({ children }: { children?: ReactNode }) => <ol>{children}</ol>,
+  li: ({ children }: { children?: ReactNode }) => <li>{children}</li>,
+  strong: ({ children }: { children?: ReactNode }) => (
+    <strong>{children}</strong>
+  ),
+  table: ({ children }: { children?: ReactNode }) => <table>{children}</table>,
+  thead: ({ children }: { children?: ReactNode }) => <thead>{children}</thead>,
+  tbody: ({ children }: { children?: ReactNode }) => <tbody>{children}</tbody>,
+  tr: ({ children }: { children?: ReactNode }) => <tr>{children}</tr>,
+  th: ({ children }: { children?: ReactNode }) => <th>{children}</th>,
+  td: ({ children }: { children?: ReactNode }) => <td>{children}</td>,
+  hr: () => null,
+};
+
+function MarkdownFragment({ text }: { text: string }) {
+  if (!text.trim()) return null;
+  return (
+    <ReactMarkdown remarkPlugins={[remarkGfm]} components={proseComponents}>
+      {text}
+    </ReactMarkdown>
+  );
+}
+
+function CaseStudySectionView({ section }: { section: ParsedSection }) {
+  const id = slugifyHeading(section.heading);
+
+  return (
+    <section
+      className={`case-study-section${section.isOverview ? " is-overview" : ""}`}
+      id={id}
+      aria-labelledby={`${id}-label`}
+    >
+      <header className="case-study-section-header">
+        {section.isOverview ? (
+          <h2 id={`${id}-label`} className="case-study-section-title">
+            {section.heading}
+          </h2>
+        ) : (
+          <>
+            <h2 id={`${id}-label`} className="case-study-section-label">
+              {section.heading}
+            </h2>
+            {section.headline ? (
+              <p className="case-study-section-headline">{section.headline}</p>
+            ) : null}
+          </>
+        )}
+      </header>
+
+      {section.blocks.map((block, index) => {
+        const key = `${id}-${block.type}-${index}`;
+
+        if (block.type === "paragraph") {
+          return (
+            <div key={key} className="case-study-block">
+              <MarkdownFragment text={block.text} />
+            </div>
+          );
+        }
+
+        if (block.type === "subsection") {
+          return (
+            <div key={key} className="case-study-subsection">
+              <h3 className="case-study-subsection-title">{block.title}</h3>
+              {block.body ? (
+                <div className="case-study-prose">
+                  <MarkdownFragment text={block.body} />
+                </div>
+              ) : null}
+            </div>
+          );
+        }
+
+        if (block.type === "image") {
+          return (
+            <figure key={key} className="case-study-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={block.src} alt={block.alt} />
+              {block.alt ? (
+                <figcaption className="case-study-media-caption">
+                  {block.alt}
+                </figcaption>
+              ) : null}
+            </figure>
+          );
+        }
+
+        if (block.type === "callout") {
+          return (
+            <blockquote key={key} className="case-study-callout">
+              <p>{block.text}</p>
+            </blockquote>
+          );
+        }
+
+        return (
+          <div key={key} className="case-study-prose">
+            <MarkdownFragment text={block.text} />
+          </div>
+        );
+      })}
+    </section>
+  );
+}
+
 export function CaseStudyContent({ markdown }: CaseStudyContentProps) {
   const body = getCaseStudyBody(markdown);
+  const sections = splitMarkdownSections(body).map(({ heading, content }) =>
+    parseSection(heading, content),
+  );
 
   return (
     <article className="case-study-content">
       <div className="case-study-body">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            h1: () => null,
-            h2: ({ children }) => {
-              const id = slugifyHeading(childrenToText(children));
-              return <h2 id={id}>{children}</h2>;
-            },
-            blockquote: ({ children }) => (
-              <blockquote className="case-study-callout">{children}</blockquote>
-            ),
-            img: ({ src, alt }) => {
-              if (!src) return null;
-              return (
-                <figure className="case-study-media">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt={alt ?? ""} />
-                  {alt ? (
-                    <figcaption className="case-study-media-caption">
-                      {alt}
-                    </figcaption>
-                  ) : null}
-                </figure>
-              );
-            },
-            p: ({ children, node }) => {
-              if (isMediaOnlyParagraph(children, node as HastNode | undefined)) {
-                return <>{children}</>;
-              }
-              return <p>{children}</p>;
-            },
-            hr: () => <hr className="case-study-divider" />,
-          }}
-        >
-          {body}
-        </ReactMarkdown>
+        {sections.map((section) => (
+          <CaseStudySectionView
+            key={slugifyHeading(section.heading)}
+            section={section}
+          />
+        ))}
       </div>
     </article>
   );

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:wght@400;500;600&display=swap");
 
 :root {
   /* Tailwind neutral palette (oklch) */
@@ -36,13 +36,14 @@
   /* Typography */
   --font-sans: "Zalando Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --text-size: 15px;
-  --text-size-caption: 14px;
+  --text-size-caption: 13px;
   --text-size-meta-label: 16px;
   --text-size-h3: 18px;
   --text-size-section-title: 20px;
   --text-size-title: 24px;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
+  --font-weight-bold: 560;
   --letter-spacing-wide: 0.04em;
   --line-height: 1.5;
   --line-height-body: 24px;
@@ -86,7 +87,7 @@
   --media-aspect-ratio: 16 / 9;
   --page-top: 2%;
   --page-inline: 2%;
-  --case-study-content-max: 640px;
+  --case-study-content-max: 600px;
   --case-study-meta-max: 660px;
   --case-study-callout-border: 3px;
   --dropdown-menu-min-width: 200px;

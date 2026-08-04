@@ -3,45 +3,124 @@
   flex-direction: column;
   width: var(--size-full);
   max-width: var(--case-study-content-max);
-  padding: var(--space-none) var(--space-none) var(--space-2xl);
+  padding: var(--space-none) var(--space-none) var(--space-page-y);
   color: var(--color-foreground);
 }
 
+/* 80px between H2 sections */
 .case-study-body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-none);
+  gap: var(--space-page-y);
   width: var(--size-full);
   padding: var(--space-none) var(--space-md);
 }
 
-/* Figma content stack: 32px between blocks inside a section */
-.case-study-body > * + * {
-  margin-top: var(--space-block);
+/* 32px within a section */
+.case-study-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-block);
+  width: var(--size-full);
+  scroll-margin-top: var(--space-md);
 }
 
-.case-study-body > *:first-child {
-  margin-top: var(--space-none);
-}
-
-/* Major section breaks use 40px around dividers */
-.case-study-body > hr,
-.case-study-body > .case-study-divider {
-  margin-top: var(--space-2xl);
-  margin-bottom: var(--space-none);
-}
-
-.case-study-body > hr + *,
-.case-study-body > .case-study-divider + * {
-  margin-top: var(--space-2xl);
-}
-
+/* 8px nested groups */
+.case-study-section-header,
+.case-study-subsection,
 .case-study-media {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
   width: var(--size-full);
   margin: var(--space-none);
+}
+
+.case-study-block,
+.case-study-prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-none);
+  width: var(--size-full);
+}
+
+.case-study-section-label {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-size-caption);
+  line-height: var(--line-height-normal);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.case-study-section-title,
+.case-study-section-header .case-study-section-headline {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-size-section-title);
+  line-height: var(--line-height-normal);
+  color: var(--neutral-900);
+}
+
+.case-study-subsection-title {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size-h3);
+  line-height: var(--line-height-normal);
+  color: var(--neutral-900);
+}
+
+.case-study-h4 {
+  margin: var(--space-none);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-size);
+  line-height: var(--line-height);
+  color: var(--color-foreground);
+}
+
+.case-study-block p,
+.case-study-prose p {
+  margin: var(--space-none);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-body);
+}
+
+.case-study-prose p + p {
+  margin-top: var(--line-height-body);
+}
+
+.case-study-section strong,
+.case-study-prose strong {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-foreground);
+}
+
+.case-study-section ul,
+.case-study-section ol,
+.case-study-prose ul,
+.case-study-prose ol {
+  margin: var(--space-none);
+  padding-left: var(--space-xl);
+  font-size: var(--text-size);
+  line-height: var(--line-height-body);
+  color: var(--color-body);
+}
+
+.case-study-prose p + ul,
+.case-study-prose p + ol {
+  margin-top: var(--space-none);
+}
+
+.case-study-section li,
+.case-study-prose li {
+  margin: var(--space-none);
+  padding-left: var(--space-2xs);
+}
+
+.case-study-section li::marker,
+.case-study-prose li::marker {
+  color: var(--color-body);
 }
 
 .case-study-media img,
@@ -59,87 +138,6 @@
   color: var(--color-text-muted);
 }
 
-/* Section label — blue uppercase 14px */
-.case-study-body h2 {
-  margin: var(--space-none);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--text-size-caption);
-  line-height: var(--line-height-normal);
-  text-transform: uppercase;
-  color: var(--color-accent);
-  scroll-margin-top: var(--space-md);
-}
-
-/* Section headline immediately under label — 20px medium */
-.case-study-body h2 + p {
-  margin-top: var(--space-sm);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--text-size-section-title);
-  line-height: var(--line-height-normal);
-  color: var(--neutral-900);
-}
-
-.case-study-body p + p {
-  margin-top: var(--line-height-body);
-}
-
-/* Subsection title — 18px medium */
-.case-study-body h3 {
-  margin: var(--space-none);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--text-size-h3);
-  line-height: var(--line-height-normal);
-  color: var(--neutral-900);
-}
-
-.case-study-body h3 + p,
-.case-study-body h3 + ul,
-.case-study-body h3 + ol {
-  margin-top: var(--space-sm);
-}
-
-.case-study-body h4 {
-  margin: var(--space-none);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--text-size);
-  line-height: var(--line-height);
-  color: var(--color-foreground);
-}
-
-.case-study-body p {
-  margin: var(--space-none);
-  font-size: var(--text-size);
-  line-height: var(--line-height-body);
-  color: var(--color-body);
-}
-
-.case-study-body strong {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-foreground);
-}
-
-.case-study-body ul,
-.case-study-body ol {
-  margin: var(--space-none);
-  padding-left: var(--space-xl);
-  font-size: var(--text-size);
-  line-height: var(--line-height-body);
-  color: var(--color-body);
-}
-
-.case-study-body li {
-  margin: var(--space-none);
-  padding-left: var(--space-2xs);
-}
-
-.case-study-body li + li {
-  margin-top: var(--space-none);
-}
-
-.case-study-body li::marker {
-  color: var(--color-body);
-}
-
 .case-study-callout {
   width: var(--size-full);
   margin: var(--space-none);
@@ -155,14 +153,16 @@
   color: var(--color-accent);
 }
 
-.case-study-body table {
+.case-study-section table,
+.case-study-prose table {
   width: var(--size-full);
   border-collapse: collapse;
-  margin: var(--space-sm) var(--space-none);
+  margin: var(--space-none);
   font-size: var(--text-size-caption);
 }
 
-.case-study-body thead th {
+.case-study-section thead th,
+.case-study-prose thead th {
   text-align: left;
   font-weight: var(--font-weight-medium);
   color: var(--color-foreground);
@@ -171,7 +171,8 @@
   vertical-align: top;
 }
 
-.case-study-body tbody td {
+.case-study-section tbody td,
+.case-study-prose tbody td {
   text-align: left;
   color: var(--color-body);
   border-bottom: var(--divider-height) solid var(--color-divider);
@@ -179,24 +180,9 @@
   vertical-align: top;
 }
 
-.case-study-body tbody tr:last-child td {
+.case-study-section tbody tr:last-child td,
+.case-study-prose tbody tr:last-child td {
   border-bottom: none;
-}
-
-.case-study-body hr,
-.case-study-divider {
-  width: var(--size-full);
-  border: none;
-  border-top: var(--border-width) solid var(--color-divider);
-}
-
-/* Body copy after section headline */
-.case-study-body h2 + p + p {
-  margin-top: var(--space-block);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--text-size);
-  line-height: var(--line-height-body);
-  color: var(--color-body);
 }
 
 /* Breakpoint: var(--breakpoint-lg) */
