@@ -62,13 +62,14 @@ In order to understand how Air Canada contact centre teams approached analyzing 
 
 The teams consistently followed this investigation workflow:
 
-![Investigation workflow](/assets/conversation-insights/workflow.svg)
+![Typical workflow followed](/assets/conversation-insights/workflow.svg)
 
 This workflow enabled teams to take targeted operational actions such as identifying coaching opportunities for agents and refining IVR routing based on emerging customer issues. Ultimately, this workflow model set the foundation for how the product should be designed.
 
 ### Key Insights
 
 1. The investigation workflow revealed that insights were not endpoints, but starting points for understanding and resolving customer issues.
+
 2. Teams used call insights to identify issues, then combined it with operational metadata to understand causes, trace impact, and take action.
 
 ## Constraints

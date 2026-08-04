@@ -27,10 +27,25 @@ export function getCaseStudyMarkdown(id: string): string | undefined {
   return caseStudies[id];
 }
 
-/** Quick Read: meta + Overview (+ My Contributions) only. */
+/**
+ * Quick Read: Problem through Discovery & Insights (matches Figma case-study frame).
+ * Falls back to content before the first non-Overview H2 when Problem is missing.
+ */
 export function getCaseStudyQuickRead(markdown: string): string {
-  const match = markdown.match(/^([\s\S]*?)(?=\n## (?!Overview\b))/);
-  return (match?.[1] ?? markdown).trim();
+  const problemStart = markdown.search(/^## Problem\s*$/m);
+  if (problemStart === -1) {
+    const match = markdown.match(/^([\s\S]*?)(?=\n## (?!Overview\b))/);
+    return (match?.[1] ?? markdown).trim();
+  }
+
+  const fromProblem = markdown.slice(problemStart);
+  const nextSection = fromProblem.search(
+    /\n## (?!Problem\b|Discovery\b)/,
+  );
+  const content =
+    nextSection === -1 ? fromProblem : fromProblem.slice(0, nextSection);
+
+  return content.trim();
 }
 
 export function slugifyHeading(title: string): string {

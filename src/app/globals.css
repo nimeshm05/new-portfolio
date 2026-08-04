@@ -82,11 +82,11 @@
   --preview-media-size: 90%;
   --preview-media-min-height: 220px;
   --preview-media-inset: var(--space-xl);
-  --details-media-max: 1015px;
+  --details-media-max: 1280px;
   --media-aspect-ratio: 16 / 9;
   --page-top: 2%;
   --page-inline: 2%;
-  --case-study-content-max: 720px;
+  --case-study-content-max: 640px;
   --case-study-meta-max: 660px;
   --case-study-callout-border: 3px;
   --dropdown-menu-min-width: 200px;
@@ -97,7 +97,7 @@
   --radius-none: 0;
   --radius-item: 4px;
   --radius-preview: 4px;
-  --radius-card: 8px;
+  --radius-card: 4px;
   --radius-full: 50%;
 
   /* Effects */

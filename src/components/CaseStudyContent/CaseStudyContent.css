@@ -1,7 +1,6 @@
 .case-study-content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
   width: var(--size-full);
   max-width: var(--case-study-content-max);
   padding: var(--space-none) var(--space-none) var(--space-2xl);
@@ -16,12 +15,25 @@
   padding: var(--space-none) var(--space-md);
 }
 
+/* Figma content stack: 32px between blocks inside a section */
 .case-study-body > * + * {
   margin-top: var(--space-block);
 }
 
 .case-study-body > *:first-child {
   margin-top: var(--space-none);
+}
+
+/* Major section breaks use 40px around dividers */
+.case-study-body > hr,
+.case-study-body > .case-study-divider {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-none);
+}
+
+.case-study-body > hr + *,
+.case-study-body > .case-study-divider + * {
+  margin-top: var(--space-2xl);
 }
 
 .case-study-media {
@@ -47,17 +59,18 @@
   color: var(--color-text-muted);
 }
 
+/* Section label — blue uppercase 14px */
 .case-study-body h2 {
   margin: var(--space-none);
   font-weight: var(--font-weight-regular);
   font-size: var(--text-size-caption);
   line-height: var(--line-height-normal);
-  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
   color: var(--color-accent);
   scroll-margin-top: var(--space-md);
 }
 
+/* Section headline immediately under label — 20px medium */
 .case-study-body h2 + p {
   margin-top: var(--space-sm);
   font-weight: var(--font-weight-medium);
@@ -70,6 +83,7 @@
   margin-top: var(--line-height-body);
 }
 
+/* Subsection title — 18px medium */
 .case-study-body h3 {
   margin: var(--space-none);
   font-weight: var(--font-weight-medium);
@@ -114,11 +128,12 @@
 }
 
 .case-study-body li {
-  margin: var(--space-xs) var(--space-none);
+  margin: var(--space-none);
+  padding-left: var(--space-2xs);
 }
 
 .case-study-body li + li {
-  margin-top: var(--space-sm);
+  margin-top: var(--space-none);
 }
 
 .case-study-body li::marker {
@@ -173,9 +188,9 @@
   width: var(--size-full);
   border: none;
   border-top: var(--border-width) solid var(--color-divider);
-  margin: var(--space-sm) var(--space-none);
 }
 
+/* Body copy after section headline */
 .case-study-body h2 + p + p {
   margin-top: var(--space-block);
   font-weight: var(--font-weight-regular);

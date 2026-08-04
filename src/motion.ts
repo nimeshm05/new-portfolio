@@ -73,3 +73,42 @@ export const SIDEBAR_RAIL_VARIANTS = {
     transition: PAGE_SLIDE_TRANSITION,
   },
 };
+
+/** Shared easing for details chrome (navbar, padding). */
+export const DETAILS_EXPAND_TRANSITION = {
+  duration: 0.42,
+  ease: SLIDE_EASE,
+};
+
+/** Preview card lifts into details — spring so it eases, not snaps. */
+export const DETAILS_MEDIA_TRANSITION = {
+  type: "spring" as const,
+  stiffness: 220,
+  damping: 28,
+  mass: 0.9,
+};
+
+export const DETAILS_CONTENT_VARIANTS = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.42,
+      ease: SLIDE_EASE,
+      // Let the card lead, then reveal copy
+      delay: 0.16,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 12,
+    transition: {
+      duration: 0.18,
+      ease: "easeIn" as const,
+    },
+  },
+};

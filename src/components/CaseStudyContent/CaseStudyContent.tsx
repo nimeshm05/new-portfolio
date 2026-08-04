@@ -22,7 +22,28 @@ function childrenToText(children: ReactNode): string {
   return "";
 }
 
-function isMediaOnlyParagraph(children: ReactNode): boolean {
+type HastNode = {
+  type?: string;
+  tagName?: string;
+  value?: string;
+  children?: HastNode[];
+};
+
+function isMediaOnlyParagraph(
+  children: ReactNode,
+  node?: HastNode,
+): boolean {
+  if (node?.children) {
+    const elements = node.children.filter((child) => child.type === "element");
+    const hasText = node.children.some(
+      (child) => child.type === "text" && Boolean(child.value?.trim()),
+    );
+
+    if (!hasText && elements.length === 1 && elements[0]?.tagName === "img") {
+      return true;
+    }
+  }
+
   const nodes = Children.toArray(children).filter((child) => {
     if (typeof child === "string") return child.trim().length > 0;
     return true;
@@ -31,10 +52,14 @@ function isMediaOnlyParagraph(children: ReactNode): boolean {
   if (nodes.length !== 1) return false;
 
   const only = nodes[0];
+  if (!isValidElement(only)) return false;
+
+  const props = only.props as { className?: string; src?: string };
+
+  // react-markdown passes the custom `img` element here (with `src`),
+  // not the rendered <figure> — detect either form.
   return (
-    isValidElement(only) &&
-    only.type === "figure" &&
-    (only.props as { className?: string }).className === "case-study-media"
+    props.className === "case-study-media" || typeof props.src === "string"
   );
 }
 
@@ -100,8 +125,8 @@ export function CaseStudyContent({ markdown }: CaseStudyContentProps) {
                 </figure>
               );
             },
-            p: ({ children }) => {
-              if (isMediaOnlyParagraph(children)) {
+            p: ({ children, node }) => {
+              if (isMediaOnlyParagraph(children, node as HastNode | undefined)) {
                 return <>{children}</>;
               }
               return <p>{children}</p>;

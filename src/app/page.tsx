@@ -24,6 +24,7 @@ export default function Home() {
 
   const isFullscreen = selectedItem?.kind === "project";
   const displayedItem = selectedItem ?? activeItem;
+  const isExpanded = Boolean(selectedItem);
 
   return (
     <main className="home">
@@ -43,13 +44,14 @@ export default function Home() {
             <ProjectDetails
               key={displayedItem.id}
               item={displayedItem}
+              expanded={isExpanded}
               onClose={() => handleSelectItem(null)}
               sectionTarget={sectionTarget}
               onSelectSection={setSectionTarget}
               onSectionScrolled={handleSectionScrolled}
               onActiveSectionChange={setActiveSectionId}
               activeSectionId={activeSectionId}
-              showClose={Boolean(selectedItem)}
+              showClose={isExpanded}
             />
           ) : null}
         </div>
